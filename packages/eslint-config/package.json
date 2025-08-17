@@ -5,7 +5,7 @@
   "private": true,
   "exports": {
     "./base": "./base.js",
-    "./react-internal": "./react-internal.js"
+    "./react": "./react.js"
   },
   "scripts": {
     "clean": "rm -rf node_modules"

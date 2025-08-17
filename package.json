@@ -1,12 +1,9 @@
 {
-  "name": "thomas-newman",
+  "name": "thomas-newman-cv-ai",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types",
     "clean": "rm -rf node_modules"
   },
   "devDependencies": {

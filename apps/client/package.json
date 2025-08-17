@@ -1,0 +1,44 @@
+{
+  "name": "client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --port 3000",
+    "start": "node .output/server/index.mjs",
+    "build": "vite build",
+    "serve": "vite preview",
+    "test": "vitest run",
+    "lint": "eslint --fix .",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "rm -rf node_modules",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@tanstack/react-devtools": "catalog:",
+    "@tanstack/react-router": "catalog:",
+    "@tanstack/react-router-devtools": "catalog:",
+    "@tanstack/react-router-ssr-query": "catalog:",
+    "@tanstack/react-start": "catalog:",
+    "@tanstack/router-plugin": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tailwindcss": "catalog:",
+    "vite-tsconfig-paths": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@tanstack/eslint-config": "catalog:",
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "jsdom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:",
+    "web-vitals": "catalog:"
+  }
+}

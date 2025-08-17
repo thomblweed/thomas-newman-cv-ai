@@ -1,5 +1,5 @@
 {
-  "name": "thomas-newman",
+  "name": "thomas-newman-cv-ai",
   "private": true,
   "scripts": {
     "build": "turbo run build",

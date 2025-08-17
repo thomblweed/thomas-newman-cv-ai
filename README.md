@@ -1,4 +1,4 @@
-# Thomas Newman
+# Thomas Newman CV AI
 
 ## Pre-requisites
 

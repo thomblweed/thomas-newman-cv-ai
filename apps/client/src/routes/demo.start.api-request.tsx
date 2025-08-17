@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
 function getNames() {
-  return fetch('/api/demo-names').then((res) => res.json())
+  return fetch('/api/demo-names').then((res) => res.json());
 }
 
 export const Route = createFileRoute('/demo/start/api-request')({
-  component: Home,
-})
+  component: Home
+});
 
 function Home() {
-  const [names, setNames] = useState<Array<string>>([])
+  const [names, setNames] = useState<Array<string>>([]);
 
   useEffect(() => {
-    getNames().then(setNames)
-  }, [])
+    getNames().then(setNames);
+  }, []);
 
   return (
     <div
@@ -23,7 +23,7 @@ function Home() {
       style={{
         backgroundColor: '#000',
         backgroundImage:
-          'radial-gradient(ellipse 60% 60% at 0% 100%, #444 0%, #222 60%, #000 100%)',
+          'radial-gradient(ellipse 60% 60% at 0% 100%, #444 0%, #222 60%, #000 100%)'
       }}
     >
       <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
@@ -40,5 +40,5 @@ function Home() {
         </ul>
       </div>
     </div>
-  )
+  );
 }

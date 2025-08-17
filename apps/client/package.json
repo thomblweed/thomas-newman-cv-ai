@@ -8,10 +8,10 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest run",
-    "lint": "eslint",
-    "format": "prettier",
-    "check": "prettier --write . && eslint --fix",
-    "clean": "rm -rf node_modules"
+    "lint": "eslint --fix .",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "rm -rf node_modules",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -36,7 +36,6 @@
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
-    "prettier": "^3.5.3",
     "typescript": "5.9.2",
     "vite": "^6.3.5",
     "vitest": "^3.0.5",

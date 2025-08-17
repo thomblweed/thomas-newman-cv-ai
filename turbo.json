@@ -13,7 +13,8 @@
       "dependsOn": ["^typecheck"]
     },
     "format": {
-      "dependsOn": ["^format"]
+      "dependsOn": ["^format"],
+      "cache": false
     },
     "//#clean": {},
     "clean": {

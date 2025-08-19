@@ -1,7 +1,17 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-primary: hsl(322, 46%, 70%);
+  --color-secondary: hsl(199, 49%, 55%);
+
+  --color-alternate: hsl(323, 22%, 47%);
+  --color-grey: hsl(208, 88%, 83%);
+  --color-bright: hsl(180, 100%, 97%);
+  --color-dark: hsl(237, 43%, 10%);
+  --color-dark-red: hsl(288, 43%, 9%);
+}
+
 body {
-  @apply m-0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

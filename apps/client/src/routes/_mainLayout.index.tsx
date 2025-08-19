@@ -5,5 +5,5 @@ export const Route = createFileRoute('/_mainLayout/')({
 });
 
 function App() {
-  return <div>hello</div>;
+  return <div></div>;
 }

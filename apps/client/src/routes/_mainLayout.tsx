@@ -6,11 +6,10 @@ export const Route = createFileRoute('/_mainLayout')({
 });
 
 function MainLayout() {
-  console.log('MainLayout');
   return (
     <>
       <BackgroundImage />
-      <main className="">
+      <main className="my-4">
         <Outlet />
       </main>
     </>

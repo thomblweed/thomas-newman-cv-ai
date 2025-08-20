@@ -31,25 +31,23 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="">
+    <html lang="" className="h-full">
       <head>
         <HeadContent />
       </head>
-      <body className="bg-dark text-grey">
-        {children}
-        <TanstackDevtools
-          config={{
-            position: 'bottom-left'
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />
-            }
-          ]}
-        />
-        <Scripts />
-      </body>
+      <body className="bg-dark text-grey">{children}</body>
+      <Scripts />
+      <TanstackDevtools
+        config={{
+          position: 'bottom-left'
+        }}
+        plugins={[
+          {
+            name: 'Tanstack Router',
+            render: <TanStackRouterDevtoolsPanel />
+          }
+        ]}
+      />
     </html>
   );
 }

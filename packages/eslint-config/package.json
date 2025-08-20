@@ -3,9 +3,16 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "types": "./index.d.ts",
   "exports": {
-    "./base": "./base.js",
-    "./react": "./react.js"
+    "./base": {
+      "types": "./index.d.ts",
+      "default": "./base.js"
+    },
+    "./react": {
+      "types": "./index.d.ts",
+      "default": "./react.js"
+    }
   },
   "scripts": {
     "clean": "rm -rf node_modules"
@@ -15,11 +22,12 @@
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-only-warn": "^1.1.0",
-    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-dom": "^1.52.6",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-x": "^1.52.6",
     "eslint-plugin-turbo": "^2.5.0",
     "globals": "^16.3.0",
-    "typescript": "^5.9.2",
+    "typescript": "catalog:",
     "typescript-eslint": "^8.39.0"
   }
 }

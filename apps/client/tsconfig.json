@@ -1,6 +1,12 @@
 {
   "extends": "@repo/typescript-config/base.json",
-  "include": ["**/*.ts", "**/*.tsx", "eslint.config.js", "vite.config.js"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "eslint.config.js",
+    "vite.config.js",
+    "tanstack-eslint-config.d.ts"
+  ],
   "compilerOptions": {
     "jsx": "react-jsx",
     "module": "ESNext",

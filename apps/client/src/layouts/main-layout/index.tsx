@@ -1,5 +1,4 @@
 import { Outlet } from '@tanstack/react-router';
-
 import { BackgroundImage } from './components/background-image';
 import { Footer } from './components/footer';
 

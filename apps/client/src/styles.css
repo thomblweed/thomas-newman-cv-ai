@@ -11,6 +11,19 @@
   --color-dark-red: hsl(288, 43%, 9%);
 }
 
+@layer base {
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: var(--transition-duration) ease-out;
+  }
+
+  a:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 8px var(--color-grey);
+  }
+}
+
 @layer components {
   .content-view {
     --max-width: 48rem;

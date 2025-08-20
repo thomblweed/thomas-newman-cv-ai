@@ -1,3 +1,5 @@
+import { ContactInfo } from './components/contact-info';
+
 interface FooterProps {
   footerText: string;
 }
@@ -12,7 +14,9 @@ export const Footer = ({ footerText }: FooterProps) => (
             Copyright &copy; {new Date().getFullYear()}
           </p>
         </div>
-        <div>{/* <ContactInfo />*/}</div>
+        <div>
+          <ContactInfo />
+        </div>
       </div>
     </div>
   </footer>

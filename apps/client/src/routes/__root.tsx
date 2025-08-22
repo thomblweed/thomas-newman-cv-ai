@@ -3,6 +3,8 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanstackDevtools } from '@tanstack/react-devtools';
 
 import appCss from '../styles.css?url';
+import fontCss from '../font.css?url';
+
 import type { ReactNode } from 'react';
 
 export const Route = createRootRoute({
@@ -23,6 +25,10 @@ export const Route = createRootRoute({
       {
         rel: 'stylesheet',
         href: appCss
+      },
+      {
+        rel: 'stylesheet',
+        href: fontCss
       }
     ]
   }),

@@ -12,6 +12,11 @@
 }
 
 @layer base {
+  body {
+    @apply text-base md:text-[1.125rem];
+    font-family: 'Roboto Mono', 'Helvetica', 'Arial', 'sans-serif';
+  }
+
   a {
     color: var(--color-primary);
     text-decoration: none;
@@ -27,8 +32,9 @@
 @layer components {
   .content-view {
     --max-width: 48rem;
+    --spacing-size: 1.5rem;
 
-    width: min(var(--max-width), 100% - (--spacing(2) * 2));
+    width: min(var(--max-width), 100% - (var(--spacing-size) * 2));
     margin-inline: auto;
   }
 

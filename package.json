@@ -4,11 +4,13 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules",
+    "check": "npm-check-updates --interactive --format group --workspaces"
   },
   "devDependencies": {
-    "prettier": "^3.6.2",
-    "turbo": "^2.5.6",
+    "npm-check-updates": "19.2.0",
+    "prettier": "3.7.4",
+    "turbo": "2.7.2",
     "typescript": "catalog:"
   },
   "packageManager": "pnpm@9.6.0",

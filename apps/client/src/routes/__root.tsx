@@ -1,6 +1,6 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-import { TanstackDevtools } from '@tanstack/react-devtools';
+import { TanStackDevtools } from '@tanstack/react-devtools';
 
 import appCss from '../styles.css?url';
 import fontCss from '../font.css?url';
@@ -43,7 +43,7 @@ function RootDocument({ children }: { children: ReactNode }) {
       </head>
       <body className="bg-dark text-grey">{children}</body>
       <Scripts />
-      <TanstackDevtools
+      <TanStackDevtools
         config={{
           position: 'bottom-left'
         }}

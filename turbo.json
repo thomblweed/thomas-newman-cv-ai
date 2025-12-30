@@ -21,9 +21,6 @@
       "dependsOn": ["//#clean", "^clean"],
       "cache": false
     },
-    "//#check": {
-      "cache": false
-    },
     "dev": {
       "cache": false,
       "persistent": true

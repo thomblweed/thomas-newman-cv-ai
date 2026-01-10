@@ -1,0 +1,29 @@
+{
+  "name": "mcp-server",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently 'pnpm dev:tsc' 'pnpm dev:esbuild' 'pnpm dev:node'",
+    "dev:tsc": "tsc --watch --preserveWatchOutput",
+    "dev:node": "node --watch dist/index.js",
+    "dev:esbuild": "pnpm build --watch",
+    "start": "pnpm build && node dist/index.js",
+    "build": "esbuild src/*.ts --platform=node --outdir=dist --format=esm --packages=external",
+    "clean": "rm -rf node_modules dist",
+    "lint": "eslint --fix .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^25.0.3",
+    "concurrently": "^9.2.1",
+    "esbuild": "^0.27.2",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.2",
+    "zod": "^4.3.5"
+  }
+}

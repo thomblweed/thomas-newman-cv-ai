@@ -9,7 +9,7 @@ export const MainLayout = () => {
       <BackgroundImage />
       <div className="grid grid-rows-[auto_1fr_auto] h-[100dvh]">
         <Header />
-        <main className="my-4">
+        <main className="content-view my-4">
           <Outlet />
         </main>
         <Footer footerText="thomas newman" />

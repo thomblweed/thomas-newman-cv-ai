@@ -16,5 +16,8 @@
   "packageManager": "pnpm@9.6.0",
   "engines": {
     "node": "22.18.0"
+  },
+  "dependencies": {
+    "gray-matter": "4.0.3"
   }
 }

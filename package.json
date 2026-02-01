@@ -11,13 +11,10 @@
     "npm-check-updates": "19.3.1",
     "prettier": "3.7.4",
     "turbo": "2.7.3",
-    "typescript": "catalog:"
+    "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@10.28.2",
   "engines": {
     "node": "22.18.0"
-  },
-  "dependencies": {
-    "gray-matter": "4.0.3"
   }
 }

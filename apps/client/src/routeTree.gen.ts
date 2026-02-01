@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RootLayoutRouteImport } from './routes/_rootLayout'
 import { Route as RootLayoutIndexRouteImport } from './routes/_rootLayout.index'
+import { Route as ApiChatRouteImport } from './routes/api.chat'
 
 const RootLayoutRoute = RootLayoutRouteImport.update({
   id: '/_rootLayout',
@@ -21,28 +22,37 @@ const RootLayoutIndexRoute = RootLayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => RootLayoutRoute,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof RootLayoutIndexRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
+  '/api/chat': typeof ApiChatRoute
   '/': typeof RootLayoutIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_rootLayout': typeof RootLayoutRouteWithChildren
+  '/api/chat': typeof ApiChatRoute
   '/_rootLayout/': typeof RootLayoutIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/_rootLayout' | '/_rootLayout/'
+  to: '/api/chat' | '/'
+  id: '__root__' | '/_rootLayout' | '/api/chat' | '/_rootLayout/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   RootLayoutRoute: typeof RootLayoutRouteWithChildren
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -61,6 +71,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RootLayoutIndexRouteImport
       parentRoute: typeof RootLayoutRoute
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -78,6 +95,7 @@ const RootLayoutRouteWithChildren = RootLayoutRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   RootLayoutRoute: RootLayoutRouteWithChildren,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

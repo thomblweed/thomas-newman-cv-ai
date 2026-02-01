@@ -50,7 +50,7 @@ declare module '@tanstack/react-router' {
     '/_rootLayout': {
       id: '/_rootLayout'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof RootLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }

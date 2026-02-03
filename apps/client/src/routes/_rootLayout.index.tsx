@@ -1,11 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { getProfileFunction } from '@/server/cv/profile.function';
+import { Chat } from '@/ui/chat';
 
 export const Route = createFileRoute('/_rootLayout/')({
-  component: RootPage,
-  loader: async () => await getProfileFunction()
+  component: RootPage
 });
 
 function RootPage() {
-  return <div>RootPage</div>;
+  return <Chat />;
 }

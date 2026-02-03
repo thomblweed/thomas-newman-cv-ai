@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RootLayoutRouteImport } from './routes/_rootLayout'
 import { Route as RootLayoutIndexRouteImport } from './routes/_rootLayout.index'
-import { Route as ApiChatRouteImport } from './routes/api.chat'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const RootLayoutRoute = RootLayoutRouteImport.update({
   id: '/_rootLayout',

@@ -8,104 +8,104 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as RootLayoutRouteImport } from './routes/_rootLayout'
-import { Route as RootLayoutIndexRouteImport } from './routes/_rootLayout.index'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as RootLayoutRouteImport } from './routes/_rootLayout';
+import { Route as RootLayoutIndexRouteImport } from './routes/_rootLayout.index';
+import { Route as ApiChatRouteImport } from './routes/api/chat';
 
 const RootLayoutRoute = RootLayoutRouteImport.update({
   id: '/_rootLayout',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 const RootLayoutIndexRoute = RootLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => RootLayoutRoute,
-} as any)
+  getParentRoute: () => RootLayoutRoute
+} as any);
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
+  getParentRoute: () => rootRouteImport
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof RootLayoutIndexRoute
-  '/api/chat': typeof ApiChatRoute
+  '/': typeof RootLayoutIndexRoute;
+  '/api/chat': typeof ApiChatRoute;
 }
 export interface FileRoutesByTo {
-  '/api/chat': typeof ApiChatRoute
-  '/': typeof RootLayoutIndexRoute
+  '/api/chat': typeof ApiChatRoute;
+  '/': typeof RootLayoutIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_rootLayout': typeof RootLayoutRouteWithChildren
-  '/api/chat': typeof ApiChatRoute
-  '/_rootLayout/': typeof RootLayoutIndexRoute
+  __root__: typeof rootRouteImport;
+  '/_rootLayout': typeof RootLayoutRouteWithChildren;
+  '/api/chat': typeof ApiChatRoute;
+  '/_rootLayout/': typeof RootLayoutIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/chat'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/api/chat' | '/'
-  id: '__root__' | '/_rootLayout' | '/api/chat' | '/_rootLayout/'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: '/' | '/api/chat';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/api/chat' | '/';
+  id: '__root__' | '/_rootLayout' | '/api/chat' | '/_rootLayout/';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  RootLayoutRoute: typeof RootLayoutRouteWithChildren
-  ApiChatRoute: typeof ApiChatRoute
+  RootLayoutRoute: typeof RootLayoutRouteWithChildren;
+  ApiChatRoute: typeof ApiChatRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/_rootLayout': {
-      id: '/_rootLayout'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof RootLayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/_rootLayout';
+      path: '';
+      fullPath: '/';
+      preLoaderRoute: typeof RootLayoutRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/_rootLayout/': {
-      id: '/_rootLayout/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof RootLayoutIndexRouteImport
-      parentRoute: typeof RootLayoutRoute
-    }
+      id: '/_rootLayout/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof RootLayoutIndexRouteImport;
+      parentRoute: typeof RootLayoutRoute;
+    };
     '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/api/chat';
+      path: '/api/chat';
+      fullPath: '/api/chat';
+      preLoaderRoute: typeof ApiChatRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
 interface RootLayoutRouteChildren {
-  RootLayoutIndexRoute: typeof RootLayoutIndexRoute
+  RootLayoutIndexRoute: typeof RootLayoutIndexRoute;
 }
 
 const RootLayoutRouteChildren: RootLayoutRouteChildren = {
-  RootLayoutIndexRoute: RootLayoutIndexRoute,
-}
+  RootLayoutIndexRoute: RootLayoutIndexRoute
+};
 
 const RootLayoutRouteWithChildren = RootLayoutRoute._addFileChildren(
-  RootLayoutRouteChildren,
-)
+  RootLayoutRouteChildren
+);
 
 const rootRouteChildren: RootRouteChildren = {
   RootLayoutRoute: RootLayoutRouteWithChildren,
-  ApiChatRoute: ApiChatRoute,
-}
+  ApiChatRoute: ApiChatRoute
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { getRouter } from './router.tsx';
+import type { createStart } from '@tanstack/react-start';
 declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }

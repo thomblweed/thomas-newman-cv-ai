@@ -9,10 +9,10 @@ import { useState } from 'react';
 import type { SubmitEventHandler } from 'react';
 
 const chatOptions = createChatClientOptions({
-  connection: fetchServerSentEvents('/api/chat'),
-  onChunk: (chunk) => {
-    console.log('Received chunk:', chunk);
-  }
+  connection: fetchServerSentEvents('/api/chat')
+  // onChunk: (chunk) => {
+  //   console.log('Received chunk:', chunk);
+  // }
 });
 
 export const Chat = () => {
@@ -35,7 +35,7 @@ export const Chat = () => {
           <div
             key={message.id}
             className={`mb-4 ${
-              message.role === 'assistant' ? 'text-blue-600' : 'text-gray-800'
+              message.role === 'assistant' ? 'text-blue-600' : 'text-gray-200'
             }`}
           >
             <div className="font-semibold mb-1">

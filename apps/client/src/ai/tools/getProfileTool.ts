@@ -5,7 +5,7 @@ import { getProfile } from '@/server/cv/profile.server';
 export const profileToolDefinition = toolDefinition({
   name: 'get_profile',
   description:
-    "Get Thomas Newman's professional profile, includes contact details, experience and links to websites",
+    "Get Thomas Newman's professional profile, includes contact details, summary and current side projects",
   inputSchema: z.object({}),
   outputSchema: z.object({
     name: z.string(),
@@ -17,8 +17,10 @@ export const profileToolDefinition = toolDefinition({
     website: z.string(),
     yearsExperience: z.number(),
     consultingExperience: z.number(),
-    specialization: z.string()
-  })
+    specialization: z.string(),
+    content: z.string()
+  }),
+  needsApproval: false
 });
 
 export const profileToolServer = profileToolDefinition.server(

@@ -7,9 +7,9 @@ export const MainLayout = () => {
   return (
     <>
       <BackgroundImage />
-      <div className="grid grid-rows-[auto_1fr_auto] h-[100dvh]">
+      <div className="grid grid-rows-[auto_1fr_auto] h-dvh">
         <Header />
-        <main className="my-4">
+        <main className="content-view my-4">
           <Outlet />
         </main>
         <Footer footerText="thomas newman" />

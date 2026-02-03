@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router';
+import { Chat } from '@/ui/chat';
 
 export const Route = createFileRoute('/_rootLayout/')({
-  component: App
+  component: RootPage
 });
 
-function App() {
-  return <div></div>;
+function RootPage() {
+  return <Chat />;
 }

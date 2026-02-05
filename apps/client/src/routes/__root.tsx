@@ -41,19 +41,21 @@ function RootDocument({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="bg-dark text-grey">{children}</body>
-      <Scripts />
-      <TanStackDevtools
-        config={{
-          position: 'bottom-left'
-        }}
-        plugins={[
-          {
-            name: 'Tanstack Router',
-            render: <TanStackRouterDevtoolsPanel />
-          }
-        ]}
-      />
+      <body className="bg-dark text-grey">
+        {children}
+        <Scripts />
+        <TanStackDevtools
+          config={{
+            position: 'bottom-left'
+          }}
+          plugins={[
+            {
+              name: 'Tanstack Router',
+              render: <TanStackRouterDevtoolsPanel />
+            }
+          ]}
+        />
+      </body>
     </html>
   );
 }

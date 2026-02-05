@@ -1,37 +1,36 @@
 import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai';
 import { createFileRoute } from '@tanstack/react-router';
-import { anthropicSummarize, anthropicText } from '@tanstack/ai-anthropic';
 import { profileToolServer } from '@/ai/tools/getProfileTool';
 import { rolesToolServer } from '@/ai/tools/getRolesTool';
 import { SYSTEM_PROMPT } from '@/ai/system/prompt';
+import { getAdapter } from '@/server/ai/adapter.server';
+import { createErrorResponse } from '@/server/response/error.server';
+import { isProduction } from '@/server/env/env.server';
 
-const createErrorResponse = (error: Error) => {
-  return new Response(
-    JSON.stringify({
-      error: error.message
-    }),
-    { status: 500, headers: { 'Content-Type': 'application/json' } }
-  );
-};
-
-const OLLAMA_MODAL = 'mistral-nemo:12b';
-const ANTHROPIC_MODEL = 'claude-haiku-4-5';
+const apiKey = isProduction
+  ? process.env.ANTHROPIC_API_KEY
+  : process.env.OLLAMA_HOST;
 
 export const Route = createFileRoute('/api/chat')({
   server: { handlers: { POST } }
 });
 
 export async function POST({ request }: { request: Request }) {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return createErrorResponse(new Error('ANTHROPIC_API_KEY not configured'));
+    return createErrorResponse(
+      new Error(
+        `${isProduction ? 'ANTHROPIC_API_KEY' : 'OLLAMA_HOST'} not configured`
+      )
+    );
   }
 
   const { messages, conversationId } = await request.json();
 
   try {
+    const adapter = await getAdapter();
+
     const stream = chat({
-      adapter: anthropicText(ANTHROPIC_MODEL),
+      adapter,
       messages,
       conversationId,
       systemPrompts: [SYSTEM_PROMPT],

@@ -9,6 +9,8 @@
   --color-bright: hsl(180, 100%, 97%);
   --color-dark: hsl(237, 43%, 10%);
   --color-dark-red: hsl(288, 43%, 9%);
+
+  --shadow-focus-glow: 0 0 8px 1px var(--color-primary);
 }
 
 @layer base {

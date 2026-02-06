@@ -19,26 +19,20 @@ tags: [frontend, full-stack, agile, consulting]
 
 Frontend Engineer with a history of full stack development and 11 years of industry experience including 5 years in consulting. Thrives in agile environments, fostering collaboration and code pairing. Demonstrates a strong passion for continuous learning and has a proven track record of quickly adapting to new technologies.
 
-## Key Strengths
-
-- **Agile Collaboration**: Thrives in agile environments, fostering team collaboration and code pairing
-- **Continuous Learning**: Proven track record of quickly adapting to new technologies
-- **Full Stack Versatility**: Strong frontend focus with full stack development background
-- **Consulting Experience**: 5 years of consulting across multiple industries and clients
-
-## Current Focus
-
-Working as a Senior Frontend Engineer at Slice, supporting independent pizzerias with web-based solutions for menu building, payments, and customer ordering systems.
-
 ## Side Projects
 
-**Thomas Newman CV AI** - Building an interactive CV with AI
+**Thomas Newman CV AI** - Building an interactive CV with Tanstack AI
+
+Tech Stack:
 
 - Turborepo for monorepo architecture
 - Tanstack Start for frontend framework
 - Tailwind for styling my own design system
+- Tanstack AI for handling the MCP configuration and chat api
 
 **Courses Website** - Building educational platform using:
+
+Tech Stack:
 
 - Nx monorepo architecture
 - Next.js for frontend framework

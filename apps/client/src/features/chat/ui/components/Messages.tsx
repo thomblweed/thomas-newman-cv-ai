@@ -1,8 +1,7 @@
-import { useChat } from '@tanstack/ai-react';
-import { chatOptions } from '../options';
+import { useChatContext } from '../context/useChatContext';
 
 export const Messages = () => {
-  const { messages } = useChat(chatOptions);
+  const { messages } = useChatContext();
 
   return (
     <div className="flex-1 overflow-y-auto p-4">

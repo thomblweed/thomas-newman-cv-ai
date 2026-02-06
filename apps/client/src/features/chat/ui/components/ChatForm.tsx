@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { useChat } from '@tanstack/ai-react';
-import { chatOptions } from '../options';
+import { useChatContext } from '../context/useChatContext';
 import type { SubmitEventHandler } from 'react';
 import { Input } from '@/ui/components/elements/Input';
 import { Button } from '@/ui/components/elements/Button';
 
 export const ChatForm = () => {
   const [input, setInput] = useState('');
-  const { sendMessage, isLoading } = useChat(chatOptions);
+  const { sendMessage, isLoading } = useChatContext();
 
   const handleSubmit: SubmitEventHandler = (e) => {
     e.preventDefault();

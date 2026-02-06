@@ -1,5 +1,5 @@
-import { isProduction } from '../env/env.server';
 import type { chat } from '@tanstack/ai';
+import { isProduction } from '@/server/env/env.server';
 
 const OLLAMA_MODAL = 'mistral-nemo:12b';
 const ANTHROPIC_MODEL = 'claude-haiku-4-5';

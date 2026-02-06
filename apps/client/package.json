@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
+    "dev:gemini": "USE_GEMINI=true pnpm dev",
     "start": "node .output/server/index.mjs",
     "build": "vite build",
     "serve": "vite preview",
@@ -42,7 +43,7 @@
     "@types/react": "19.2.13",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.3",
-    "jsdom": "26.0.0",
+    "jsdom": "28.0.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "tailwindcss": "4.1.18",

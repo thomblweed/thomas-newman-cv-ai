@@ -7,20 +7,28 @@ import { SYSTEM_PROMPT } from '@/features/chat/ai/system/prompt';
 import { profileToolServer } from '@/features/chat/ai/tools/getProfileTool';
 import { rolesToolServer } from '@/features/chat/ai/tools/getRolesTool';
 
-const apiKey = isProduction
-  ? process.env.ANTHROPIC_API_KEY
-  : process.env.OLLAMA_HOST;
-
 export const Route = createFileRoute('/api/chat')({
   server: { handlers: { POST } }
 });
 
 export async function POST({ request }: { request: Request }) {
+  // Determine which API key is needed based on adapter selection
+  const useGemini = !isProduction && process.env.USE_GEMINI === 'true';
+  const apiKey = isProduction
+    ? process.env.ANTHROPIC_API_KEY
+    : useGemini
+      ? process.env.GEMINI_API_KEY
+      : process.env.OLLAMA_HOST;
+
+  const apiKeyName = isProduction
+    ? 'ANTHROPIC_API_KEY'
+    : useGemini
+      ? 'GEMINI_API_KEY'
+      : 'OLLAMA_HOST';
+
   if (!apiKey) {
     return createErrorResponse(
-      new Error(
-        `${isProduction ? 'ANTHROPIC_API_KEY' : 'OLLAMA_HOST'} not configured`
-      )
+      new Error(`${apiKeyName} not configured`)
     );
   }
 

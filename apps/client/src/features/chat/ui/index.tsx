@@ -1,8 +1,8 @@
 'use client';
 
-import { Messages } from './ui/components/Messages';
-import { ChatForm } from './ui/components/ChatForm';
-import { ChatProvider } from './ui/context/useChatContext';
+import { Messages } from './components/Messages';
+import { ChatForm } from './components/ChatForm';
+import { ChatProvider } from './context/useChatContext';
 
 export const Chat = () => {
   return (

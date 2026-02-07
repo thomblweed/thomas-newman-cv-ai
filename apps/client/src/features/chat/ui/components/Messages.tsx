@@ -1,4 +1,11 @@
 import { useChatContext } from '../context/useChatContext';
+import { useAnimatedText } from '../hooks/useAnimatedText';
+
+const AnimatedMessage = ({ message }: { message: string }) => {
+  const animatedText = useAnimatedText(message);
+
+  return <div>{animatedText}</div>;
+};
 
 export const Messages = () => {
   const { messages } = useChatContext();
@@ -24,7 +31,10 @@ export const Messages = () => {
                   </div>
                 );
               }
-              if (part.type === 'text') {
+              if (part.type === 'text' && message.role === 'assistant') {
+                return <AnimatedMessage key={idx} message={part.content} />;
+              }
+              if (part.type === 'text' && message.role === 'user') {
                 return <div key={idx}>{part.content}</div>;
               }
               return null;

@@ -1,5 +1,6 @@
 import { toolDefinition } from '@tanstack/ai';
 import z from 'zod';
+
 import { getRoles } from '../../server/cv/roles.server';
 
 const inputSchema = z.object({
@@ -51,3 +52,5 @@ export const rolesToolServer = rolesToolDefinition.server(
     });
   }
 );
+
+export const rolesToolClient = rolesToolDefinition.client();

@@ -1,4 +1,5 @@
 import type { chat } from '@tanstack/ai';
+
 import { isProduction } from '@/server/env/env.server';
 
 const OLLAMA_MODEL = 'mistral-nemo:12b';

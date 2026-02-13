@@ -1,6 +1,8 @@
 import { cva } from 'class-variance-authority';
+
 import type { VariantProps } from 'class-variance-authority';
-import type { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes, Ref } from 'react';
+
 import { cn } from '@/lib/utils';
 
 const inputVariants = cva(
@@ -35,7 +37,7 @@ const inputVariants = cva(
 
 type InputProps = {
   className?: string;
-  ref?: React.Ref<HTMLInputElement>;
+  ref?: Ref<HTMLInputElement>;
 } & VariantProps<typeof inputVariants> &
   InputHTMLAttributes<HTMLInputElement>;
 

@@ -12,6 +12,18 @@
     "./react": {
       "types": "./index.d.ts",
       "default": "./react.js"
+    },
+    "./typescript": {
+      "types": "./index.d.ts",
+      "default": "./typescript.js"
+    },
+    "./import": {
+      "types": "./index.d.ts",
+      "default": "./import.js"
+    },
+    "./server": {
+      "types": "./index.d.ts",
+      "default": "./server.js"
     }
   },
   "scripts": {
@@ -20,12 +32,13 @@
   "devDependencies": {
     "@eslint/js": "9.39.2",
     "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-import-x": "4.16.1",
     "eslint-plugin-only-warn": "1.1.0",
-    "eslint-plugin-react-dom": "1.52.6",
-    "eslint-plugin-react-hooks": "5.2.0",
-    "eslint-plugin-react-x": "1.52.6",
-    "eslint-plugin-turbo": "2.8.3",
-    "globals": "16.5.0",
-    "typescript-eslint": "8.54.0"
+    "eslint-plugin-react-dom": "2.12.4",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-x": "2.12.4",
+    "eslint-plugin-turbo": "2.8.7",
+    "globals": "17.3.0",
+    "typescript-eslint": "8.55.0"
   }
 }

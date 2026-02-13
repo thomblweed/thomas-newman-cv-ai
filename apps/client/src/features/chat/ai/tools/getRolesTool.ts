@@ -1,6 +1,7 @@
 import { toolDefinition } from '@tanstack/ai';
 import z from 'zod';
-import { getRoles } from '@/server/cv/roles.server';
+
+import { getRoles } from '../../server/cv/roles.server';
 
 const inputSchema = z.object({
   startDate: z.string().optional().describe('Start date in YYYY-MM format'),
@@ -51,3 +52,5 @@ export const rolesToolServer = rolesToolDefinition.server(
     });
   }
 );
+
+export const rolesToolClient = rolesToolDefinition.client();

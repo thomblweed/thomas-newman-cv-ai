@@ -11,7 +11,7 @@
     "test": "vitest run",
     "lint": "eslint --fix .",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "clean": "rm -rf node_modules",
+    "clean": "rm -rf node_modules .tanstack .turbo .nitro .output dist",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

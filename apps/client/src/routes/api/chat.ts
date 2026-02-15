@@ -5,8 +5,8 @@ import { createErrorResponse } from '@/server/response/error.server';
 import { getApiKey } from '@/server/env/env.server';
 import { getAdapter } from '@/features/chat/server/ai/adapter.server';
 import { SYSTEM_PROMPT } from '@/features/chat/ai/system/prompt';
-import { profileToolServer } from '@/features/chat/ai/tools/getProfileTool';
-import { rolesToolServer } from '@/features/chat/ai/tools/getRolesTool';
+import { getProfileToolServer } from '@/features/chat/server/ai/profileTool.server';
+import { getRolesToolServer } from '@/features/chat/server/ai/rolesTool.server';
 
 export const Route = createFileRoute('/api/chat')({
   server: { handlers: { POST } }
@@ -31,7 +31,7 @@ export async function POST({ request }: { request: Request }) {
       messages,
       conversationId,
       systemPrompts: [SYSTEM_PROMPT],
-      tools: [profileToolServer, rolesToolServer],
+      tools: [getProfileToolServer, getRolesToolServer],
       agentLoopStrategy: maxIterations(5),
       maxTokens: 1024
     });

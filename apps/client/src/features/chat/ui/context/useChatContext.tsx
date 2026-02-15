@@ -6,8 +6,8 @@ import {
 import { clientTools } from '@tanstack/ai-client';
 import { createContext, use } from 'react';
 
-import { profileToolClient } from '../../ai/tools/getProfileTool';
-import { rolesToolClient } from '../../ai/tools/getRolesTool';
+import { profileToolClient } from '../tools/profileTool';
+import { rolesToolClient } from '../tools/rolesTool';
 
 import type { ReactNode } from 'react';
 import type { ChatContextType } from '../types/ChatContext.type';

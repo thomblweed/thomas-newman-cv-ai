@@ -1,9 +1,7 @@
 import { toolDefinition } from '@tanstack/ai';
 import z from 'zod';
 
-import { getRoles } from '../../server/cv/roles.server';
-
-const inputSchema = z.object({
+export const inputSchema = z.object({
   startDate: z.string().optional().describe('Start date in YYYY-MM format'),
   endDate: z.string().optional().describe('End date in YYYY-MM format'),
   months: z
@@ -41,16 +39,3 @@ export const rolesToolDefinition = toolDefinition({
   ),
   needsApproval: false
 });
-
-export const rolesToolServer = rolesToolDefinition.server(
-  async (args: unknown) => {
-    const input = inputSchema.parse(args);
-    return await getRoles({
-      startDate: input.startDate,
-      endDate: input.endDate,
-      months: input.months
-    });
-  }
-);
-
-export const rolesToolClient = rolesToolDefinition.client();

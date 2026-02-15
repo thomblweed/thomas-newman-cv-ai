@@ -4,7 +4,7 @@ name: Thomas Newman
 title: Senior Frontend Engineer
 location: Edinburgh, UK
 email: thomblweed@gmail.com
-phone: 07486 874438
+phone: please contact me on LinkedIn or Email for my phone number
 linkedin: https://www.linkedin.com/in/thomas-newman-5a50b829/
 website: https://thomblweed.dev
 years_experience: 11

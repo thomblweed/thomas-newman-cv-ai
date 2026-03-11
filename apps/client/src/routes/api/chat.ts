@@ -1,3 +1,5 @@
+import '@tanstack/react-start/server-only';
+
 import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai';
 import { createFileRoute } from '@tanstack/react-router';
 
@@ -16,9 +18,7 @@ export async function POST({ request }: { request: Request }) {
   const { apiKey, apiKeyName } = getApiKey();
 
   if (!apiKey) {
-    return createErrorResponse(
-      new Error(`${apiKeyName} not configured`)
-    );
+    return createErrorResponse(new Error(`${apiKeyName} not configured`));
   }
 
   const { messages, conversationId } = await request.json();

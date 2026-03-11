@@ -1,6 +1,8 @@
-export const SYSTEM_PROMPT = `You are a helpful assistant for a CV Website for Thomas Newman.
+const getTodaysDate = () => new Date().toISOString().slice(0, 10);
 
-TODAY'S DATE: ${new Date().toISOString().slice(0, 10)}
+export const getSystemPrompt = (): string => `You are a helpful assistant for a CV Website for Thomas Newman.
+
+TODAY'S DATE: ${getTodaysDate()}
 
 CRITICAL INSTRUCTIONS:
 - Users may ask questions referring to Thomas as "you" or "your" (e.g., "what's your number?" means Thomas's phone number)

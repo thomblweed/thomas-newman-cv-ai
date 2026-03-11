@@ -6,7 +6,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { createErrorResponse } from '@/server/response/error.server';
 import { getApiKey } from '@/server/env/env.server';
 import { getAdapter } from '@/features/chat/server/ai/adapter.server';
-import { SYSTEM_PROMPT } from '@/features/chat/ai/system/prompt';
+import { getSystemPrompt } from '@/features/chat/ai/system/prompt';
 import { getProfileToolServer } from '@/features/chat/server/ai/profileTool.server';
 import { getRolesToolServer } from '@/features/chat/server/ai/rolesTool.server';
 
@@ -30,7 +30,7 @@ export async function POST({ request }: { request: Request }) {
       adapter,
       messages,
       conversationId,
-      systemPrompts: [SYSTEM_PROMPT],
+      systemPrompts: [getSystemPrompt()],
       tools: [getProfileToolServer, getRolesToolServer],
       agentLoopStrategy: maxIterations(5),
       maxTokens: 1024

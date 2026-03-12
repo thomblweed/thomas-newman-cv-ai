@@ -6,8 +6,8 @@ import {
 import { clientTools } from '@tanstack/ai-client';
 import { createContext, use, useMemo } from 'react';
 
-import { profileToolClient } from '../tools/profileTool';
-import { rolesToolClient } from '../tools/rolesTool';
+import { profileToolClient } from '../../ai/tools/profile/client';
+import { rolesToolClient } from '../../ai/tools/roles/client';
 
 import type { ReactNode } from 'react';
 import type { ChatContextType } from '../types/ChatContext.type';
@@ -20,10 +20,7 @@ const chatClientOptions = createChatClientOptions({
   }
 });
 
-type ChatActions = Pick<
-  ChatContextType,
-  'sendMessage' | 'stop' | 'reload'
->;
+type ChatActions = Pick<ChatContextType, 'sendMessage' | 'stop' | 'reload'>;
 type ChatStatus = Pick<ChatContextType, 'isLoading' | 'error'>;
 type ChatMessages = Pick<ChatContextType, 'messages'>;
 

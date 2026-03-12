@@ -1,7 +1,7 @@
 import { toolDefinition } from '@tanstack/ai';
 import z from 'zod';
 
-export const inputSchema = z.object({
+export const rolesToolInputSchema = z.object({
   startDate: z.string().optional().describe('Start date in YYYY-MM format'),
   endDate: z.string().optional().describe('End date in YYYY-MM format'),
   months: z
@@ -14,7 +14,7 @@ export const rolesToolDefinition = toolDefinition({
   name: 'get_roles',
   description:
     "Get Thomas Newman's professional roles and work experience, including company, client, title, period, responsibilities, achievements, and tech stack.",
-  inputSchema,
+  inputSchema: rolesToolInputSchema,
   outputSchema: z.array(
     z.object({
       type: z.string(),

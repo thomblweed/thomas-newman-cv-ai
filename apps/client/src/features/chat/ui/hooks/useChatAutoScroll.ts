@@ -4,6 +4,8 @@ type ScrollToBottomOptions = {
   behavior?: ScrollBehavior;
 };
 
+const PINNED_THRESHOLD_PX = 24;
+
 export const useChatAutoScroll = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -13,9 +15,8 @@ export const useChatAutoScroll = () => {
     const el = containerRef.current;
     if (!el) return;
 
-    // Consider "pinned" when within 24px of the bottom.
     const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
-    setIsPinnedToBottom(distanceFromBottom < 24);
+    setIsPinnedToBottom(distanceFromBottom < PINNED_THRESHOLD_PX);
   };
 
   const scrollToBottom = ({
@@ -26,7 +27,6 @@ export const useChatAutoScroll = () => {
     });
   };
 
-  // If layout changes while pinned, keep the pinned state accurate.
   useEffect(() => {
     updatePinnedState();
   }, []);

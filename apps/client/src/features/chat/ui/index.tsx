@@ -13,7 +13,7 @@ export const Chat = () => (
       <ChatHeader>
         <div>
           <h1 className="text-2xl font-bold text-primary md:text-3xl">
-            Ask Thomas anything
+            Ask about my professional experience
           </h1>
           <p className="mt-1 text-base text-grey">
             Chat about experience, skills, or projects. I will answer as quickly

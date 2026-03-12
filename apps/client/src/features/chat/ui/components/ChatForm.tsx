@@ -24,6 +24,10 @@ export const ChatForm = () => {
   };
 
   useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
     if (wasLoadingRef.current && !isLoading) {
       inputRef.current?.focus();
     }

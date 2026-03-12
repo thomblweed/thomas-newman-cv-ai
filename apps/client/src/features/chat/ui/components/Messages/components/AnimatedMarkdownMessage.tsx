@@ -15,6 +15,5 @@ export const AnimatedMarkdownMessage = ({ content, onRender }: Props) => {
     onRender();
   }, [animatedText, onRender]);
 
-  // Streamed animation of markdown text, as before.
   return <MarkdownMessage content={animatedText} />;
 };

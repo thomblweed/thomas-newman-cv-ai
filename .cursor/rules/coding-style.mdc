@@ -1,0 +1,15 @@
+---
+description: General coding style and guidance
+alwaysApply: true
+---
+
+# Coding style
+
+- Prefer **clear, declarative code** over explanatory comments.
+  - When code feels like it needs a comment, first refactor: extract a function, rename variables, or introduce a well-named helper.
+  - Only add comments for non-obvious intent, constraints, or trade-offs that the code itself cannot express.
+- Avoid comments that narrate what the code does (e.g. "increment counter", "call API", "render button").
+- When generating new code, agents should:
+  - Prefer expressive naming and small components/functions.
+  - Use comments sparingly and only when they add durable value for future readers.
+

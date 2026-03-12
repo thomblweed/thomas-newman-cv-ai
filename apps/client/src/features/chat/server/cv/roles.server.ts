@@ -19,14 +19,10 @@ const isDateInRange = (
   filterStart: string | undefined,
   filterEnd: string | undefined
 ): boolean => {
-  // If no filters, include all roles
   if (!filterStart && !filterEnd) return true;
 
-  // Role overlaps with filter range if:
-  // - Role starts before or on filter end AND
-  // - Role ends after or on filter start (or is ongoing)
   const roleStartDate = roleStart;
-  const roleEndDate = roleEnd || '9999-12'; // Treat ongoing roles as ending far in the future
+  const roleEndDate = roleEnd || '9999-12';
 
   if (filterStart && roleEndDate < filterStart) return false;
   if (filterEnd && roleStartDate > filterEnd) return false;
@@ -55,7 +51,6 @@ export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
     roleFiles.map(async (file) => {
       const { frontmatter, content } = await readMarkdownFile(`roles/${file}`);
 
-      // Calculate duration_months for ongoing roles
       let durationMonths: number;
       if (
         frontmatter.duration_months === 'ongoing' ||
@@ -97,12 +92,10 @@ export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
     })
   );
 
-  // Filter by date range if provided
   const filteredRoles = roles.filter((role) =>
     isDateInRange(role.period_start, role.period_end, startDate, endDate)
   );
 
-  // Sort by period_start descending (most recent first)
   return filteredRoles.sort((a, b) => {
     if (b.period_start < a.period_start) return -1;
     if (b.period_start > a.period_start) return 1;

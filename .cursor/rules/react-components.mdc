@@ -1,0 +1,21 @@
+---
+description: React component patterns (TypeScript/TSX)
+globs: **/*.tsx
+alwaysApply: false
+---
+
+# React components
+
+- Prefer **small, named components** over inline markup when reused or visually complex (e.g. extract SVGs into `*Icon` components).
+- Ensure components have their **own file** by default.
+  - The exception is when **small compound components** are clearer co-located in the same file.
+- Extract non-trivial inline UI widgets (e.g. loaders/indicators) into their own named components.
+- Prefer **co-located UI** under `apps/client/src/features/<feature>/...` for feature-specific components.
+- Keep **state co-located**:
+  - Local UI state stays in the component (e.g. input text).
+  - Lift state only when multiple siblings need to coordinate.
+  - Prefer splitting “god” contexts into smaller hooks/contexts (`use…Actions`, `use…Status`, `use…Data`) to reduce re-renders.
+- Keep changes **lint-clean**; prefer ESLint fixes on save (or run `pnpm turbo lint` after changes).
+- TypeScript:
+  - Prefer `type` for props.
+  - When wrapping DOM elements, prefer `ComponentPropsWithoutRef<'...'>` and pass through props.

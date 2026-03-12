@@ -3,31 +3,12 @@ import path from 'node:path';
 
 import { readMarkdownFile } from '../markdown/markdown.server';
 
-interface Role {
-  type: string;
-  company: string;
-  client?: string;
-  title: string;
-  period_start: string;
-  period_end?: string;
-  duration_months: number;
-  employment_type: string;
-  end_reason?: string;
-  industry?: string;
-  ownership?: string;
-  tags?: Array<string>;
-  seniority?: string;
-  responsibilities_count?: number;
-  achievements_count?: number;
-  promotion?: string;
-  tech_stack?: Array<string>;
-  content: string;
-}
+import type { Role } from '../../interfaces/role.interface';
 
 interface GetRolesOptions {
-  startDate?: string; // YYYY-MM format, filter roles that overlap with this date or later
-  endDate?: string; // YYYY-MM format, filter roles that overlap with this date or earlier
-  months?: number; // Filter roles from the past X months (calculated from today)
+  startDate?: string;
+  endDate?: string;
+  months?: number;
 }
 
 const dataPath = path.join(process.cwd(), 'data/cv/roles');
@@ -38,14 +19,10 @@ const isDateInRange = (
   filterStart: string | undefined,
   filterEnd: string | undefined
 ): boolean => {
-  // If no filters, include all roles
   if (!filterStart && !filterEnd) return true;
 
-  // Role overlaps with filter range if:
-  // - Role starts before or on filter end AND
-  // - Role ends after or on filter start (or is ongoing)
   const roleStartDate = roleStart;
-  const roleEndDate = roleEnd || '9999-12'; // Treat ongoing roles as ending far in the future
+  const roleEndDate = roleEnd || '9999-12';
 
   if (filterStart && roleEndDate < filterStart) return false;
   if (filterEnd && roleStartDate > filterEnd) return false;
@@ -53,13 +30,10 @@ const isDateInRange = (
   return true;
 };
 
-export const getRoles = async (
-  options?: GetRolesOptions
-): Promise<Array<Role>> => {
+export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
   const files = await fs.readdir(dataPath);
   const roleFiles = files.filter((file) => file.endsWith('.md'));
 
-  // Calculate date range if months parameter is provided
   let startDate = options?.startDate;
   let endDate = options?.endDate;
 
@@ -77,7 +51,6 @@ export const getRoles = async (
     roleFiles.map(async (file) => {
       const { frontmatter, content } = await readMarkdownFile(`roles/${file}`);
 
-      // Calculate duration_months for ongoing roles
       let durationMonths: number;
       if (
         frontmatter.duration_months === 'ongoing' ||
@@ -119,12 +92,10 @@ export const getRoles = async (
     })
   );
 
-  // Filter by date range if provided
   const filteredRoles = roles.filter((role) =>
     isDateInRange(role.period_start, role.period_end, startDate, endDate)
   );
 
-  // Sort by period_start descending (most recent first)
   return filteredRoles.sort((a, b) => {
     if (b.period_start < a.period_start) return -1;
     if (b.period_start > a.period_start) return 1;

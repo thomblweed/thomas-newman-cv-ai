@@ -1,12 +1,14 @@
+import '@tanstack/react-start/server-only';
+
 import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai';
 import { createFileRoute } from '@tanstack/react-router';
 
 import { createErrorResponse } from '@/server/response/error.server';
 import { getApiKey } from '@/server/env/env.server';
 import { getAdapter } from '@/features/chat/server/ai/adapter.server';
-import { SYSTEM_PROMPT } from '@/features/chat/ai/system/prompt';
-import { profileToolServer } from '@/features/chat/ai/tools/getProfileTool';
-import { rolesToolServer } from '@/features/chat/ai/tools/getRolesTool';
+import { getSystemPrompt } from '@/features/chat/ai/system/prompt';
+import { profileToolServer } from '@/features/chat/ai/tools/profile/server';
+import { rolesToolServer } from '@/features/chat/ai/tools/roles/server';
 
 export const Route = createFileRoute('/api/chat')({
   server: { handlers: { POST } }
@@ -16,9 +18,7 @@ export async function POST({ request }: { request: Request }) {
   const { apiKey, apiKeyName } = getApiKey();
 
   if (!apiKey) {
-    return createErrorResponse(
-      new Error(`${apiKeyName} not configured`)
-    );
+    return createErrorResponse(new Error(`${apiKeyName} not configured`));
   }
 
   const { messages, conversationId } = await request.json();
@@ -30,7 +30,7 @@ export async function POST({ request }: { request: Request }) {
       adapter,
       messages,
       conversationId,
-      systemPrompts: [SYSTEM_PROMPT],
+      systemPrompts: [getSystemPrompt()],
       tools: [profileToolServer, rolesToolServer],
       agentLoopStrategy: maxIterations(5),
       maxTokens: 1024

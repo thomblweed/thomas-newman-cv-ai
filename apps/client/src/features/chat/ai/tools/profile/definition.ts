@@ -1,8 +1,6 @@
 import { toolDefinition } from '@tanstack/ai';
 import z from 'zod';
 
-import { getProfile } from '../../server/cv/profile.server';
-
 export const profileToolDefinition = toolDefinition({
   name: 'get_profile',
   description:
@@ -23,9 +21,3 @@ export const profileToolDefinition = toolDefinition({
   }),
   needsApproval: false
 });
-
-export const profileToolServer = profileToolDefinition.server(
-  async () => await getProfile()
-);
-
-export const profileToolClient = profileToolDefinition.client();

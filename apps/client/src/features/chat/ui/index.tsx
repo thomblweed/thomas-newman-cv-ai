@@ -6,6 +6,7 @@ import { ChatHeader } from './components/ChatHeader';
 import { ChatBody } from './components/ChatBody';
 import { Messages } from './components/Messages';
 import { ChatForm } from './components/ChatForm';
+import { Disclaimer } from './components/Disclaimer';
 
 export const Chat = () => (
   <ChatProvider>
@@ -19,6 +20,9 @@ export const Chat = () => (
             Chat about experience, skills, or projects. I will answer as quickly
             as I can.
           </p>
+          <div className="mt-3">
+            <Disclaimer />
+          </div>
         </div>
       </ChatHeader>
       <ChatBody>

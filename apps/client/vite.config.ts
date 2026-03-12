@@ -12,7 +12,12 @@ const config = defineConfig({
     }),
     tailwindcss(),
     tanstackStart(),
-    viteReact()
+    viteReact({
+      babel: {
+        // Must run first in the Babel pipeline.
+        plugins: ['babel-plugin-react-compiler']
+      }
+    })
   ]
 });
 

@@ -1,6 +1,7 @@
 const getTodaysDate = () => new Date().toISOString().slice(0, 10);
 
-export const getSystemPrompt = (): string => `You are a helpful assistant for a CV Website for Thomas Newman.
+export const getSystemPrompt =
+  (): string => `You are a helpful assistant for a CV Website for Thomas Newman.
 
 TODAY'S DATE: ${getTodaysDate()}
 

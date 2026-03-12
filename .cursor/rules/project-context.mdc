@@ -1,0 +1,24 @@
+---
+description: Project context + conventions for thomas-newman-cv-ai
+alwaysApply: true
+---
+
+# Project context
+
+- Monorepo managed with `pnpm` + Turborepo (`turbo.json`).
+- Node version is pinned via `package.json` engines (Node `22.18.0`).
+- Apps live under `apps/` (e.g. `apps/client`).
+
+## Common commands
+
+- `pnpm turbo dev`: run the client (Vite)
+- `pnpm turbo typecheck`: TypeScript typecheck
+- `pnpm turbo lint`: ESLint (auto-fix)
+- `pnpm turbo serve`: preview the built app (depends on build)
+- `pnpm turbo format`: Prettier (repo-wide)
+
+## Environment variables (repo-wide)
+
+Turborepo declares common env vars (see `turbo.json`), including:
+- `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `OLLAMA_HOST`, `USE_GEMINI`, `NODE_ENV`
+

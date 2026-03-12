@@ -4,7 +4,7 @@ import {
   useChat
 } from '@tanstack/ai-react';
 import { clientTools } from '@tanstack/ai-client';
-import { createContext, use } from 'react';
+import { createContext, use, useMemo } from 'react';
 
 import { profileToolClient } from '../tools/profileTool';
 import { rolesToolClient } from '../tools/rolesTool';
@@ -20,12 +20,49 @@ const chatClientOptions = createChatClientOptions({
   }
 });
 
+type ChatActions = Pick<
+  ChatContextType,
+  'sendMessage' | 'stop' | 'reload'
+>;
+type ChatStatus = Pick<ChatContextType, 'isLoading' | 'error'>;
+type ChatMessages = Pick<ChatContextType, 'messages'>;
+
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
+const ChatActionsContext = createContext<ChatActions | undefined>(undefined);
+const ChatStatusContext = createContext<ChatStatus | undefined>(undefined);
+const ChatMessagesContext = createContext<ChatMessages | undefined>(undefined);
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const chat = useChat(chatClientOptions);
 
-  return <ChatContext value={chat}>{children}</ChatContext>;
+  const actions = useMemo<ChatActions>(
+    () => ({
+      sendMessage: chat.sendMessage,
+      stop: chat.stop,
+      reload: chat.reload
+    }),
+    [chat.reload, chat.sendMessage, chat.stop]
+  );
+
+  const status = useMemo<ChatStatus>(
+    () => ({ isLoading: chat.isLoading, error: chat.error }),
+    [chat.error, chat.isLoading]
+  );
+
+  const messages = useMemo<ChatMessages>(
+    () => ({ messages: chat.messages }),
+    [chat.messages]
+  );
+
+  return (
+    <ChatContext value={chat}>
+      <ChatActionsContext value={actions}>
+        <ChatStatusContext value={status}>
+          <ChatMessagesContext value={messages}>{children}</ChatMessagesContext>
+        </ChatStatusContext>
+      </ChatActionsContext>
+    </ChatContext>
+  );
 };
 
 export const useChatContext = () => {
@@ -33,6 +70,36 @@ export const useChatContext = () => {
 
   if (context === undefined) {
     throw new Error('useChatContext must be used within a ChatProvider');
+  }
+
+  return context;
+};
+
+export const useChatActions = () => {
+  const context = use(ChatActionsContext);
+
+  if (context === undefined) {
+    throw new Error('useChatActions must be used within a ChatProvider');
+  }
+
+  return context;
+};
+
+export const useChatStatus = () => {
+  const context = use(ChatStatusContext);
+
+  if (context === undefined) {
+    throw new Error('useChatStatus must be used within a ChatProvider');
+  }
+
+  return context;
+};
+
+export const useChatMessages = () => {
+  const context = use(ChatMessagesContext);
+
+  if (context === undefined) {
+    throw new Error('useChatMessages must be used within a ChatProvider');
   }
 
   return context;

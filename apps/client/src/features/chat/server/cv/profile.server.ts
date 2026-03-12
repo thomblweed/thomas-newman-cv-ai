@@ -1,5 +1,6 @@
 import { readMarkdownFile } from '../markdown/markdown.server';
-import { Profile } from '../../interfaces/profile.interface';
+
+import type { Profile } from '../../interfaces/profile.interface';
 
 export const getProfile = async (): Promise<Profile> => {
   const { frontmatter, content } = await readMarkdownFile('profile.md');

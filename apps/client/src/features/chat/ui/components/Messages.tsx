@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { useChatContext } from '../context/useChatContext';
+import { useChatMessages } from '../context/useChatContext';
 import { useAnimatedText } from '../hooks/useAnimatedText';
 
 import { MarkdownMessage } from './MarkdownMessage';
@@ -12,12 +12,13 @@ const AnimatedMarkdownMessage = ({ content }: { content: string }) => {
 
 export const Messages = () => {
   const bottomRef = useRef<HTMLDivElement>(null);
-  const { messages } = useChatContext();
+  const { messages } = useChatMessages();
 
-  const lastMessageText = messages[messages.length - 1]?.parts
-    ?.filter((p) => p.type === 'text')
-    .map((p) => p.content)
-    .join('') ?? '';
+  const lastMessageText =
+    messages[messages.length - 1]?.parts
+      ?.filter((p) => p.type === 'text')
+      .map((p) => p.content)
+      .join('') ?? '';
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -41,9 +42,7 @@ export const Messages = () => {
           >
             <div
               className={`max-w-[80%] rounded px-4 py-3 text-base ${
-                isAssistant
-                  ? 'bg-dark/80 text-grey'
-                  : 'bg-primary text-dark'
+                isAssistant ? 'bg-dark/80 text-grey' : 'bg-primary text-dark'
               }`}
             >
               {message.parts.map((part, idx) => {
@@ -65,9 +64,7 @@ export const Messages = () => {
                 }
 
                 if (part.type === 'text' && message.role === 'user') {
-                  return (
-                    <MarkdownMessage key={idx} content={part.content} />
-                  );
+                  return <MarkdownMessage key={idx} content={part.content} />;
                 }
 
                 return null;

@@ -46,6 +46,11 @@ const components = {
       {children}
     </h3>
   ),
+  code: ({ children }: MarkdownComponentProps) => (
+    <code className="rounded bg-dark/30 px-1 py-0.5 text-sm text-grey">
+      {children}
+    </code>
+  )
 };
 
 type MarkdownMessageProps = {

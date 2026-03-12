@@ -1,0 +1,23 @@
+---
+description: Git commit and push conventions
+alwaysApply: true
+---
+
+# Git commits and pushes
+
+- Use **Conventional Commits** for all commits the agent creates:
+  - Common types: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, `test:`.
+  - Optionally include a scope when it adds clarity, e.g. `feat(chat):` or `fix(api):`.
+- Commit messages should:
+  - Focus on the **why** and high-level **what**, not low-level implementation detail.
+  - Be concise in the subject line; keep bodies short and only when needed.
+- When the user asks to **commit** or **commit and push**:
+  - Stage only the relevant, non-generated files for the requested change.
+  - Create a single conventional commit that groups logically related edits.
+  - Run a quick typecheck or tests when practical before pushing.
+  - Push the **current branch** with a normal `git push` (no `--force` unless the user explicitly requests it).
+- Never:
+  - Commit secrets or obvious credentials.
+  - Change git configuration.
+  - Force-push to shared branches unless the user specifically asks and understands the impact.
+

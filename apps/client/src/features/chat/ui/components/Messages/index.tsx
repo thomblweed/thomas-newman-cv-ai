@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { useChatMessages, useChatStatus } from '../../context/useChatContext';
 import { useChatAutoScroll } from '../../hooks/useChatAutoScroll';
 import { MarkdownMessage } from '../MarkdownMessage';
+import { cn } from '@/lib/utils';
 
 import { AnimatedMarkdownMessage } from './components/AnimatedMarkdownMessage';
 import { ThinkingIndicator } from './components/ThinkingIndicator';
+import { WaitingIndicator } from './components/WaitingIndicator';
 
 export const Messages = () => {
   const { messages } = useChatMessages();
@@ -44,6 +46,9 @@ export const Messages = () => {
       message.parts?.some((part) => part.type === 'thinking')
   );
 
+  const showWaitingIndicator =
+    isLoading && !assistantHasStartedResponding && !assistantHasThinkingPart;
+
   useEffect(() => {
     if (!isPinnedToBottom) return;
     scrollToBottom({ behavior: 'smooth' });
@@ -78,12 +83,13 @@ export const Messages = () => {
         return (
           <div
             key={message.id}
-            className={`flex w-full ${isAssistant ? 'justify-start' : 'justify-end'}`}
+            className={cn('flex w-full', isAssistant ? 'justify-start' : 'justify-end')}
           >
             <div
-              className={`max-w-[80%] rounded px-4 py-3 text-base ${
+              className={cn(
+                'max-w-[80%] rounded px-4 py-3 text-base',
                 isAssistant ? 'bg-dark/80 text-grey' : 'bg-primary text-dark'
-              }`}
+              )}
             >
               {message.parts.map((part, idx) => {
                 if (part.type === 'thinking') {
@@ -113,15 +119,7 @@ export const Messages = () => {
           </div>
         );
       })}
-      {isLoading &&
-        !assistantHasStartedResponding &&
-        !assistantHasThinkingPart && (
-          <div className="flex w-full justify-start">
-            <div className="max-w-[80%] rounded px-4 py-3 text-base bg-dark/80 text-grey">
-              <ThinkingIndicator />
-            </div>
-          </div>
-        )}
+      {showWaitingIndicator ? <WaitingIndicator /> : null}
       <div ref={bottomRef} aria-hidden />
     </div>
   );

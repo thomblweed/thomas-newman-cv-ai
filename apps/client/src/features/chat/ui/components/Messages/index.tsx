@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 import { useChatMessages, useChatStatus } from '../../context/useChatContext';
 import { useChatAutoScroll } from '../../hooks/useChatAutoScroll';
 import { MarkdownMessage } from '../MarkdownMessage';
-import { cn } from '@/lib/utils';
 
 import { AnimatedMarkdownMessage } from './components/AnimatedMarkdownMessage';
 import { ThinkingIndicator } from './components/ThinkingIndicator';
 import { WaitingIndicator } from './components/WaitingIndicator';
+
+import { cn } from '@/lib/utils';
 
 export const Messages = () => {
   const { messages } = useChatMessages();
@@ -83,7 +84,10 @@ export const Messages = () => {
         return (
           <div
             key={message.id}
-            className={cn('flex w-full', isAssistant ? 'justify-start' : 'justify-end')}
+            className={cn(
+              'flex w-full',
+              isAssistant ? 'justify-start' : 'justify-end'
+            )}
           >
             <div
               className={cn(

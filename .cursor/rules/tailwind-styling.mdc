@@ -1,6 +1,7 @@
 ---
 description: Tailwind CSS and className conventions
 globs: "**/*.tsx"
+alwaysApply: false
 ---
 
 # Tailwind styling

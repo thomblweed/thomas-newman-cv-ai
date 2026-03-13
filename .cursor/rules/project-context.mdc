@@ -17,8 +17,7 @@ alwaysApply: true
 - `pnpm turbo serve`: preview the built app (depends on build)
 - `pnpm turbo format`: Prettier (repo-wide)
 
-## Environment variables (repo-wide)
+## Environment variables
 
-Turborepo declares common env vars (see `turbo.json`), including:
-- `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `OLLAMA_HOST`, `USE_GEMINI`, `NODE_ENV`
+See `turbo.json` for declared env vars (API keys, feature flags, etc.).
 

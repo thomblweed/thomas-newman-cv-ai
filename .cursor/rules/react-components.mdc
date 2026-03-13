@@ -18,10 +18,7 @@ alwaysApply: false
   └── components/        # Child components
       └── ChildName.tsx
   ```
-- Keep **state co-located**:
-  - Local UI state stays in the component (e.g. input text).
-  - Lift state only when multiple siblings need to coordinate.
-  - Prefer splitting “god” contexts into smaller hooks/contexts (`use…Actions`, `use…Status`, `use…Data`) to reduce re-renders.
+- Keep **state co-located** — lift only when siblings need to coordinate; split large contexts into focused hooks.
 - Keep changes **lint-clean**; prefer ESLint fixes on save (or run `pnpm turbo lint` after changes).
 - TypeScript:
   - Prefer `type` for props.

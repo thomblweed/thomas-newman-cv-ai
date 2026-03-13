@@ -19,12 +19,12 @@ const components = {
     <strong className="font-semibold text-primary">{children}</strong>
   ),
   ul: ({ children }: MarkdownComponentProps) => (
-    <ul className="my-2 list-disc pl-5 space-y-0.5 text-base text-inherit">
+    <ul className="my-2 list-disc pl-6 space-y-2 text-base text-inherit">
       {children}
     </ul>
   ),
   ol: ({ children }: MarkdownComponentProps) => (
-    <ol className="my-2 list-decimal pl-5 space-y-0.5 text-base text-inherit">
+    <ol className="my-2 list-decimal pl-6 space-y-2 text-base text-inherit">
       {children}
     </ol>
   ),
@@ -32,22 +32,22 @@ const components = {
     <li className="leading-relaxed">{children}</li>
   ),
   h1: ({ children }: MarkdownComponentProps) => (
-    <h3 className="mt-3 mb-1 text-base font-semibold text-primary first:mt-0">
+    <h3 className="mt-4 mb-2 text-base font-semibold text-primary first:mt-0">
       {children}
     </h3>
   ),
   h2: ({ children }: MarkdownComponentProps) => (
-    <h2 className="mt-3 mb-1 text-base font-semibold text-primary first:mt-0">
+    <h2 className="mt-4 mb-2 text-base font-semibold text-primary first:mt-0">
       {children}
     </h2>
   ),
   h3: ({ children }: MarkdownComponentProps) => (
-    <h3 className="mt-2 mb-0.5 text-base font-semibold text-secondary">
+    <h3 className="mt-2 mb-2 text-base font-semibold text-secondary">
       {children}
     </h3>
   ),
   code: ({ children }: MarkdownComponentProps) => (
-    <code className="rounded bg-dark/30 px-1 py-0.5 text-sm text-grey">
+    <code className="rounded bg-dark/30 px-2 py-2 text-sm text-grey">
       {children}
     </code>
   )

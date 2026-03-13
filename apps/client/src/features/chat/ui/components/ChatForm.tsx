@@ -49,7 +49,7 @@ export const ChatForm = () => {
   const canSend = input.trim().length > 0 && !isLoading;
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-primary/40 pt-3">
+    <form onSubmit={handleSubmit} className="border-t border-primary/40 pt-4">
       <div className="relative flex items-center rounded border border-primary bg-inherit transition-[box-shadow,border-color] hover:border-grey focus-within:border-grey focus-within:shadow-focus-glow">
         <Input
           ref={inputRef}
@@ -59,13 +59,13 @@ export const ChatForm = () => {
           onKeyDown={handleKeyDown}
           placeholder="Ask about my experience, skills, or projects…"
           disabled={isLoading}
-          className="h-11 border-0 pr-11 focus:shadow-none focus:outline-none md:h-12"
+          className="h-11 border-0 pr-12 focus:shadow-none focus:outline-none md:h-12"
         />
         <button
           type="submit"
           disabled={!canSend}
           aria-label="Send message"
-          className="absolute right-1 flex h-9 w-9 shrink-0 items-center justify-center rounded text-grey transition-colors hover:enabled:text-primary disabled:opacity-30 disabled:cursor-not-allowed"
+          className="absolute right-2 flex h-9 w-9 shrink-0 items-center justify-center rounded text-grey transition-colors hover:enabled:text-primary disabled:opacity-30 disabled:cursor-not-allowed"
         >
           <SendIcon aria-hidden />
         </button>

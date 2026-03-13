@@ -58,7 +58,7 @@ export const Messages = () => {
   return (
     <div
       ref={containerRef}
-      className="flex-1 space-y-3 overflow-y-auto pr-1"
+      className="flex-1 space-y-4 overflow-y-auto pr-2"
       onScroll={updatePinnedState}
     >
       {messages.map((message) => {
@@ -85,7 +85,7 @@ export const Messages = () => {
           >
             <div
               className={cn(
-                'max-w-[80%] rounded px-4 py-3 text-base',
+                'max-w-[80%] rounded px-4 py-4 text-base',
                 isAssistant ? 'bg-dark/80 text-grey' : 'bg-primary text-dark'
               )}
             >

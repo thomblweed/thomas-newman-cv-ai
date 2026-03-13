@@ -12,15 +12,8 @@ export const Chat = () => (
   <ChatProvider>
     <ChatSection>
       <ChatHeader>
-        <div className="flex flex-col gap-3">
-          <div>
-            <div className="flex flex-col gap-1">
-              <h1>Ask about my professional experience</h1>
-              <p className="text-base text-grey">
-                Chat about experience, skills, or projects.
-              </p>
-            </div>
-          </div>
+        <div className="flex items-center gap-4">
+          <h1>Ask about my professional experience</h1>
           <Disclaimer />
         </div>
       </ChatHeader>

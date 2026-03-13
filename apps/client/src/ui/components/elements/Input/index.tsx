@@ -16,7 +16,7 @@ const inputVariants = cva(
     'outline-transparent',
     'outline-offset-2',
     'bg-inherit',
-    'p-3',
+    'p-4',
     'h-11',
     'md:h-12',
     'transition-[box-shadow,border-color]',

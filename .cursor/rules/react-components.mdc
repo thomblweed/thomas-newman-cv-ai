@@ -11,6 +11,13 @@ alwaysApply: false
   - The exception is when **small compound components** are clearer co-located in the same file.
 - Extract non-trivial inline UI widgets (e.g. loaders/indicators) into their own named components.
 - Prefer **co-located UI** under `apps/client/src/features/<feature>/...` for feature-specific components.
+- When a component has **child components**, use a folder structure:
+  ```
+  ComponentName/
+  ├── index.tsx          # Main component
+  └── components/        # Child components
+      └── ChildName.tsx
+  ```
 - Keep **state co-located**:
   - Local UI state stays in the component (e.g. input text).
   - Lift state only when multiple siblings need to coordinate.

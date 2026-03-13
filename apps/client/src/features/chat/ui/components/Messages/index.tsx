@@ -61,12 +61,6 @@ export const Messages = () => {
       className="flex-1 space-y-3 overflow-y-auto pr-1"
       onScroll={updatePinnedState}
     >
-      {messages.length === 0 && (
-        <div className="flex h-full items-center justify-center text-base text-grey">
-          Ask anything about Thomas&apos;s experience, skills, or projects.
-        </div>
-      )}
-
       {messages.map((message) => {
         const isAssistant = message.role === 'assistant';
 

@@ -22,7 +22,6 @@ export const Chat = () => (
             </div>
           </div>
           <Disclaimer />
-          <div></div>
         </div>
       </ChatHeader>
       <ChatBody>

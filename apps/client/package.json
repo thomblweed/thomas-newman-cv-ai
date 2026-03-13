@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-popover": "1.1.15",
     "@tailwindcss/vite": "4.2.0",
     "@tanstack/ai": "0.5.1",
     "@tanstack/ai-anthropic": "0.5.0",

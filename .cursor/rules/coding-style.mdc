@@ -10,9 +10,6 @@ alwaysApply: true
   - Only add comments for non-obvious intent, constraints, or trade-offs that the code itself cannot express.
 - Avoid comments that narrate what the code does (e.g. "increment counter", "call API", "render button").
 - When generating new code, agents should:
-  - Prefer expressive naming and small components/functions.
+  - Prefer expressive naming.
   - Use comments sparingly and only when they add durable value for future readers.
-- For **conditional Tailwind class names**, prefer the shared helpers:
-  - Use `cn(...)` (from `@/lib/utils`) or `cva(...)` instead of string interpolation with nested ternaries.
-  - Keep conditional logic in JavaScript/TypeScript expressions, not embedded directly in template strings.
 

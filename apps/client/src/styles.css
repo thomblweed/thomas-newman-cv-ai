@@ -19,6 +19,14 @@
     font-family: 'Roboto Mono', 'Helvetica', 'Arial', 'sans-serif';
   }
 
+  h1 {
+    @apply text-2xl text-secondary;
+  }
+
+  h2 {
+    @apply text-secondary;
+  }
+
   a {
     color: var(--color-primary);
     text-decoration: none;

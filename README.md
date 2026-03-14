@@ -19,8 +19,10 @@ Scripts run via `pnpm turbo <task>` (Turborepo is a local dev dependency).
 
 ### Option A — Ollama (local model)
 
+> **Note:** Local models are fine for basic dev testing but expect slower responses and lower quality output. Performance depends on your machine's CPU/GPU, and smaller local models are less capable than cloud alternatives — responses may be less accurate or coherent. For more realistic testing of AI output quality, use Option B instead.
+
 1. Install [Ollama](https://ollama.com) and start it (macOS/Windows: app runs automatically; Linux: `ollama serve`)
-2. Pull a model: `ollama pull llama3.2` (or any from the [library](https://ollama.com/library))
+2. Pull the model: `ollama pull mistral-nemo:12b`
 3. Create `apps/client/.env`:
    ```
    OLLAMA_HOST=http://localhost:11434

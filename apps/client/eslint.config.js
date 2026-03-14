@@ -14,6 +14,22 @@ export default [
   ...reactConfig,
   ...serverConfig,
   {
+    files: ['**/*.test.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        vi: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly'
+      }
+    }
+  },
+  {
     ignores: ['.turbo', '.nitro', '.output', '.tanstack']
   }
 ];

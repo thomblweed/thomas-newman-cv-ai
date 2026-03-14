@@ -8,7 +8,7 @@ const config = defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,
-    setupFiles: ['./src/test/setup.ts']
+    setupFiles: ['./test/setup.ts']
   },
   plugins: [
     viteTsConfigPaths({

@@ -19,3 +19,7 @@ declare module '@repo/eslint-config/import' {
 declare module '@repo/eslint-config/server' {
   export const config: Linter.Config[];
 }
+
+declare module '@repo/eslint-config/vitest' {
+  export const config: Linter.Config[];
+}

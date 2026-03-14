@@ -24,6 +24,10 @@
     "./server": {
       "types": "./index.d.ts",
       "default": "./server.js"
+    },
+    "./vitest": {
+      "types": "./index.d.ts",
+      "default": "./vitest.js"
     }
   },
   "scripts": {
@@ -31,12 +35,14 @@
   },
   "devDependencies": {
     "@eslint/js": "9.39.2",
+    "@vitest/eslint-plugin": "1.6.12",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-import-x": "4.16.2",
     "eslint-plugin-only-warn": "1.2.1",
     "eslint-plugin-react-dom": "2.13.0",
     "eslint-plugin-react-hooks": "7.0.1",
     "eslint-plugin-react-x": "2.13.0",
+    "eslint-plugin-testing-library": "7.16.0",
     "eslint-plugin-turbo": "2.8.17",
     "globals": "17.4.0",
     "typescript-eslint": "8.57.0"

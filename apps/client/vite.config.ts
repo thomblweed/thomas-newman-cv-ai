@@ -11,7 +11,6 @@ const config = defineConfig({
     setupFiles: ['./src/test/setup.ts']
   },
   plugins: [
-    // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json']
     }),
@@ -19,7 +18,6 @@ const config = defineConfig({
     tanstackStart(),
     viteReact({
       babel: {
-        // Must run first in the Babel pipeline.
         plugins: ['babel-plugin-react-compiler']
       }
     })

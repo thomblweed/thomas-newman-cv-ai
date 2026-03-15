@@ -21,7 +21,7 @@ export const Disclaimer = () => (
         className="z-50 max-w-sm rounded border border-alternate/40 bg-dark px-4 py-4 text-sm text-grey shadow-focus-glow"
       >
         <p className="font-medium text-bright">
-          Answers here are a helpful guide, not a substitute for Thomas&apos;s
+          Answers here are a helpful guide, not a substitute for Thomas&apos;
           actual CV.
         </p>
         <p className="mt-2 text-grey">

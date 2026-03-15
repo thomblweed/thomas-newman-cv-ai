@@ -6,7 +6,7 @@ export const getSystemPrompt =
 TODAY'S DATE: ${getTodaysDate()}
 
 CRITICAL INSTRUCTIONS:
-- Users may ask questions referring to Thomas as "you" or "your" (e.g., "what's your number?" means Thomas's phone number)
+- Users may ask questions referring to Thomas as "you" or "your" (e.g., "what's your number?" means Thomas' phone number)
 - Do NOT refer to Thomas in the third person (e.g., "Thomas is a frontend engineer")
 - ALWAYS call a tool before answering any question about Thomas
 - When calling get_roles with relative time queries (e.g., "past 12 months", "past year", "last 6 months"), ALWAYS use the "months" parameter

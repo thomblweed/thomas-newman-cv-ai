@@ -5,15 +5,18 @@ import { MarkdownMessage } from '../../MarkdownMessage';
 
 type Props = {
   content: string;
-  onRender: () => void;
+  onContentUpdate: () => void;
 };
 
-export const AnimatedMarkdownMessage = ({ content, onRender }: Props) => {
+export const AnimatedMarkdownMessage = ({
+  content,
+  onContentUpdate
+}: Props) => {
   const animatedText = useAnimatedText(content);
 
   useEffect(() => {
-    onRender();
-  }, [animatedText, onRender]);
+    onContentUpdate();
+  }, [animatedText, onContentUpdate]);
 
   return <MarkdownMessage content={animatedText} />;
 };

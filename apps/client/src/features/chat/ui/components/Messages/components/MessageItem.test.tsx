@@ -54,7 +54,7 @@ it('should render an assistant message', () => {
 });
 
 it('should render nothing when an assistant message has no text parts', () => {
-  const message = makeMessage('assistant', [{ type: 'thinking' }]);
+  const message = makeMessage('assistant', [{ type: 'thinking', content: '' }]);
   const { container } = render(
     <MessageItem message={message} onContentUpdate={onContentUpdate} />
   );
@@ -73,7 +73,7 @@ it('should render nothing when an assistant message has only whitespace text', (
 
 it('should render a thinking indicator for thinking parts', () => {
   const message = makeMessage('assistant', [
-    { type: 'thinking' },
+    { type: 'thinking', content: '' },
     { type: 'text', content: 'I have an answer' }
   ]);
   render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);
@@ -111,7 +111,7 @@ it('should render multiple text parts', () => {
 
 it('should render thinking and text parts together for an assistant message', () => {
   const message = makeMessage('assistant', [
-    { type: 'thinking' },
+    { type: 'thinking', content: '' },
     { type: 'text', content: 'Final answer' }
   ]);
   render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);

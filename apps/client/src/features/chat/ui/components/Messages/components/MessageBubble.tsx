@@ -7,22 +7,24 @@ type Props = {
   children: ReactNode;
 };
 
-export const MessageBubble = ({ variant, children }: Props) => (
-  <div
-    className={cn(
-      'flex w-full',
-      variant === 'assistant' ? 'justify-start' : 'justify-end'
-    )}
-  >
+export const MessageBubble = ({ variant, children }: Props) => {
+  const isAssistant = variant === 'assistant';
+
+  return (
     <div
       className={cn(
-        'max-w-[80%] rounded px-4 py-4 text-base',
-        variant === 'assistant'
-          ? 'bg-dark/80 text-grey'
-          : 'bg-primary text-dark'
+        'flex w-full',
+        isAssistant ? 'justify-start' : 'justify-end'
       )}
     >
-      {children}
+      <div
+        className={cn(
+          'max-w-[80%] rounded px-4 py-4 text-base',
+          isAssistant ? 'bg-dark/80 text-grey' : 'bg-primary text-dark'
+        )}
+      >
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
+};

@@ -15,7 +15,7 @@ alwaysApply: true
   - Stage only the relevant, non-generated files for the requested change.
   - Create a single conventional commit that groups logically related edits.
   - Before staging or committing, run the project checks:
-    - Prefer the combined command `pnpm turbo lint format` so lint and format run in parallel via Turborepo.
+    - Prefer the combined command `pnpm turbo lint format typecheck` so lint and format run in parallel via Turborepo.
     - Optionally run narrower lint/format scopes when explicitly requested.
     - Additional checks (e.g. typecheck/tests) when the change scope warrants it.
   - Push the **current branch** with a normal `git push` (no `--force` unless the user explicitly requests it).
@@ -23,4 +23,3 @@ alwaysApply: true
   - Commit secrets or obvious credentials.
   - Change git configuration.
   - Force-push to shared branches unless the user specifically asks and understands the impact.
-

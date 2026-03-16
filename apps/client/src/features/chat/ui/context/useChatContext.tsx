@@ -14,10 +14,10 @@ import type { ChatContextType } from '../types/ChatContext.type';
 
 const chatClientOptions = createChatClientOptions({
   connection: fetchServerSentEvents('/api/chat'),
-  tools: clientTools(profileToolClient, rolesToolClient),
-  onChunk: (chunk) => {
-    console.log('Chunk type:', chunk.type, chunk);
-  }
+  tools: clientTools(profileToolClient, rolesToolClient)
+  // onChunk: (chunk) => {
+  //   console.log('Chunk type:', chunk.type, chunk);
+  // }
 });
 
 type ChatActions = Pick<ChatContextType, 'sendMessage' | 'stop' | 'reload'>;

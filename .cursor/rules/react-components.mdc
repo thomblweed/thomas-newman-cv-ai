@@ -23,3 +23,12 @@ alwaysApply: false
 - TypeScript:
   - Prefer `type` for props.
   - When wrapping DOM elements, prefer `ComponentPropsWithoutRef<'...'>` and pass through props.
+- React context values:
+  - Never pass an inline object literal as a context value (e.g. `<Ctx value={{ a, b }}>`). A new object is created on every render, so every consumer re-renders even when `a` and `b` are unchanged — shallow comparison always fails on object identity.
+  - Prefer **splitting into focused contexts**, one per logical concern, so a consumer only re-renders when its specific slice of state changes. This is always better than `useMemo` because it eliminates the re-render at the source rather than suppressing it downstream. See `useChatContext.tsx` for the established pattern (`ChatActionsContext`, `ChatStatusContext`, `ChatMessagesContext`).
+  - Only fall back to `useMemo` for the context value when splitting contexts would require significant restructuring and the performance impact is low.
+- `React.memo` and memoisation:
+  - Before suggesting `React.memo`, verify that **all** props will be stable across renders via shallow comparison.
+  - Object and array props (e.g. items from a state array, context values, derived objects) produce new references on every render and cause memo to fail unless the parent explicitly stabilises them with `useMemo`/`useCallback` or the library guarantees reference identity for unchanged entries.
+  - Function props must be wrapped in `useCallback` with stable deps — or read via a ref — to be stable.
+  - `React.memo` on a component whose parent re-renders with unstable prop references adds reconciliation overhead with no benefit; only suggest it when reference stability of every prop can be confirmed or is being fixed in the same change.

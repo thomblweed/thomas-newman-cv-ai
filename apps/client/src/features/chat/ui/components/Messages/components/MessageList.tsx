@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import {
   useChatMessages,
@@ -34,10 +34,15 @@ export const MessageList = () => {
 
   const showWaitingIndicator = isLoading && !assistantHasVisibleContent;
 
+  const isPinnedRef = useRef(isPinnedToBottom);
+  useEffect(() => {
+    isPinnedRef.current = isPinnedToBottom;
+  }, [isPinnedToBottom]);
+
   const handleContentUpdate = useCallback(() => {
-    if (!isPinnedToBottom) return;
+    if (!isPinnedRef.current) return;
     scrollToBottom({ behavior: 'auto' });
-  }, [isPinnedToBottom, scrollToBottom]);
+  }, [scrollToBottom]);
 
   useEffect(() => {
     if (!isPinnedToBottom) return;

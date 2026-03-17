@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 type ScrollToBottomOptions = {
   behavior?: ScrollBehavior;
@@ -27,10 +27,6 @@ export const useChatAutoScroll = () => {
     },
     []
   );
-
-  useEffect(() => {
-    updatePinnedState();
-  }, [updatePinnedState]);
 
   return {
     containerRef,

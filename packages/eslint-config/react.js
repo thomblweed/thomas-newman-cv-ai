@@ -12,7 +12,7 @@ import globals from 'globals';
 export const config = [
   js.configs.recommended,
   eslintConfigPrettier,
-  reactX.configs['recommended-typescript'],
+  reactX.configs.recommended,
   reactDom.configs.recommended,
   {
     languageOptions: {
@@ -28,9 +28,7 @@ export const config = [
     },
     settings: { react: { version: 'detect' } },
     rules: {
-      ...pluginReactHooks.configs.recommended.rules,
-      // React scope no longer necessary with new JSX transform.
-      'react/react-in-jsx-scope': 'off'
+      ...pluginReactHooks.configs.recommended.rules
     }
   }
 ];

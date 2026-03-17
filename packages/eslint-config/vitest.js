@@ -14,7 +14,8 @@ export const config = [
     },
     rules: {
       ...vitest.configs.recommended.rules,
-      ...testingLibrary.configs['flat/react'].rules
+      ...testingLibrary.configs['flat/react'].rules,
+      'react-x/component-hook-factories': 'off'
     },
     languageOptions: {
       globals: vitest.environments.env.globals

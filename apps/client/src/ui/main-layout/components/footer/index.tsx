@@ -1,5 +1,7 @@
 import { ContactInfo } from './components/contact-info';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 interface FooterProps {
   footerText: string;
 }
@@ -11,7 +13,7 @@ export const Footer = ({ footerText }: FooterProps) => (
         <div>
           <p className="p-0 text-primary">{footerText}</p>
           <p className="p-0 text-xs text-secondary">
-            Copyright &copy; {new Date().getFullYear()}
+            Copyright &copy; {CURRENT_YEAR}
           </p>
         </div>
         <div>

@@ -10,6 +10,31 @@ alwaysApply: false
 - Ensure components have their **own file** by default.
   - The exception is when **small compound components** are clearer co-located in the same file.
 - Extract non-trivial inline UI widgets (e.g. loaders/indicators) into their own named components.
+- **Favour composition over anonymous styled divs.** A `<div className="flex ...">` is imperative — it describes *how* it looks. Replace styled structural wrappers with named layout components that describe *what* they are. Examples:
+  - `<AlertLayout>` — a `role="alert"` container with its border, shadow, and flex layout baked in
+  - `<AlertBody>` — the content column next to the icon
+  - `<AlertMessage>` — the text block for the primary message
+  This makes the consuming component read as a description of intent rather than a stylesheet.
+  ```tsx
+  // Prefer this
+  <AlertLayout>
+    <WarningIcon />
+    <AlertBody>
+      <AlertMessage>{message}</AlertMessage>
+      <RetryButton onClick={reload} />
+    </AlertBody>
+  </AlertLayout>
+
+  // Over this
+  <div role="alert" className="flex items-start gap-3 rounded border ...">
+    <WarningIcon />
+    <div className="flex min-w-0 flex-1 flex-col gap-3">
+      <p className="font-medium text-bright">{message}</p>
+      <button onClick={reload}>Try again</button>
+    </div>
+  </div>
+  ```
+- **Use the compound component pattern only for dynamic composition** — where the caller needs control over what is rendered and in what order. Do not use it for static layouts where the structure is always the same; named layout components are simpler and sufficient there. A compound component is appropriate when different call sites assemble genuinely different combinations of parts.
 - Prefer **co-located UI** under `apps/client/src/features/<feature>/...` for feature-specific components.
 - When a component has **child components**, use a folder structure:
   ```

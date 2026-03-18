@@ -8,9 +8,11 @@ import { createContext, use, useMemo } from 'react';
 
 import { profileToolClient } from '../../ai/tools/profile/client';
 import { rolesToolClient } from '../../ai/tools/roles/client';
+import { classifyChatError } from '../utils/classifyChatError';
 
 import type { ReactNode } from 'react';
 import type { ChatContextType } from '../types/ChatContext.type';
+import type { ChatErrorCode } from '@/server/response/chatErrorCode';
 
 const chatClientOptions = createChatClientOptions({
   connection: fetchServerSentEvents('/api/chat'),
@@ -21,7 +23,10 @@ const chatClientOptions = createChatClientOptions({
 });
 
 type ChatActions = Pick<ChatContextType, 'sendMessage' | 'stop' | 'reload'>;
-type ChatStatus = Pick<ChatContextType, 'isLoading' | 'error'>;
+type ChatStatus = Pick<ChatContextType, 'isLoading' | 'error'> & {
+  kind: ChatErrorCode | null;
+  retryAt: Date | null;
+};
 type ChatMessages = Pick<ChatContextType, 'messages'>;
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -41,9 +46,19 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
     [chat.reload, chat.sendMessage, chat.stop]
   );
 
+  const classification = useMemo(
+    () => (chat.error ? classifyChatError(chat.error) : null),
+    [chat.error]
+  );
+
   const status = useMemo<ChatStatus>(
-    () => ({ isLoading: chat.isLoading, error: chat.error }),
-    [chat.error, chat.isLoading]
+    () => ({
+      isLoading: chat.isLoading,
+      error: chat.error,
+      kind: classification?.kind ?? null,
+      retryAt: classification?.retryAt ?? null
+    }),
+    [chat.error, chat.isLoading, classification]
   );
 
   const messages = useMemo<ChatMessages>(

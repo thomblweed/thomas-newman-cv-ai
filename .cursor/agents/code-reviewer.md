@@ -24,6 +24,8 @@ When invoked:
 - **Commits**: Conventional Commits (`feat:`, `fix:`, `refactor:`, etc.); exclude generated files (e.g. `routeTree.gen.ts`)
 - **Styling**: Use `cn()` from `@/lib/utils` for conditional class names; `cva()` for variants; no template string interpolation for `className`
 - **React**: Small named components; co-locate under `features/<feature>/`; folder structure for compound components (`ComponentName/index.tsx` + `components/`)
+- **Composition**: Flag anonymous styled `<div>` wrappers — these are imperative (they describe *how* something looks). Prefer named layout components that describe *what* they are (e.g. `<AlertLayout>`, `<AlertBody>`), making the consuming component read as a description of intent. Use the compound component pattern only when the caller genuinely needs dynamic control over what is rendered and in what order; for static layouts, named components are simpler and sufficient.
+- **Markup**: Review HTML structure closely — prefer semantic elements (`<section>`, `<article>`, `<nav>`, `<ul>/<li>`, `<p>`, etc.) over plain `<div>`/`<span>` where the element has meaningful structure or role; flag `<div>` wrappers used purely for layout that could be replaced with CSS (`align-self`, `flex`, etc.)
 - **Comments**: Sparingly; only for non-obvious intent or trade-offs—prefer refactoring over explanatory comments
 
 ## Output format

@@ -5,6 +5,7 @@ import { ChatSection } from './components/ChatSection';
 import { ChatHeader } from './components/ChatHeader';
 import { ChatBody } from './components/ChatBody';
 import { Messages } from './components/Messages';
+import { ChatErrorBanner } from './components/ChatErrorBanner';
 import { ChatForm } from './components/ChatForm';
 import { Disclaimer } from './components/Disclaimer';
 
@@ -19,6 +20,7 @@ export const Chat = () => (
       </ChatHeader>
       <ChatBody>
         <Messages />
+        <ChatErrorBanner />
         <ChatForm />
       </ChatBody>
     </ChatSection>

@@ -2,7 +2,7 @@
 
 import * as Popover from '@radix-ui/react-popover';
 
-import { WarningIcon } from './components/WarningIcon';
+import { WarningIcon } from '../WarningIcon';
 
 export const Disclaimer = () => (
   <Popover.Root>

@@ -13,11 +13,13 @@ export const ChatForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const wasLoadingRef = useRef(false);
   const { sendMessage } = useChatActions();
-  const { isLoading } = useChatStatus();
+  const { isLoading, error } = useChatStatus();
+
+  const isBlocked = isLoading || !!error;
 
   const trySend = () => {
     const message = input.trim();
-    if (!message || isLoading) return;
+    if (!message || isBlocked) return;
 
     sendMessage(message);
     setInput('');
@@ -46,7 +48,7 @@ export const ChatForm = () => {
     }
   };
 
-  const canSend = input.trim().length > 0 && !isLoading;
+  const canSend = input.trim().length > 0 && !isBlocked;
 
   return (
     <form onSubmit={handleSubmit} className="border-t border-primary/40 pt-4">
@@ -58,7 +60,7 @@ export const ChatForm = () => {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Ask about my experience, skills, or projects…"
-          disabled={isLoading}
+          disabled={isBlocked}
           className="h-11 border-0 pr-12 focus:shadow-none focus:outline-none md:h-12"
         />
         <button

@@ -1,9 +1,17 @@
-export const WarningIcon = () => (
+import type { ComponentPropsWithoutRef } from 'react';
+
+import { cn } from '@/lib/utils';
+
+export const WarningIcon = ({
+  className,
+  ...props
+}: ComponentPropsWithoutRef<'svg'>) => (
   <svg
     viewBox="0 0 16 16"
-    className="h-6 w-6 text-primary"
     aria-hidden="true"
     focusable="false"
+    className={cn('text-primary', className)}
+    {...props}
   >
     <path
       d="M8 2 L15 14 H1 Z"

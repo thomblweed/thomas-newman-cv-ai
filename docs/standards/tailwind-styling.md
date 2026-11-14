@@ -1,10 +1,6 @@
----
-description: Tailwind CSS and className conventions
-globs: "**/*.tsx"
-alwaysApply: false
----
-
 # Tailwind styling
+
+Applies to `**/*.tsx`.
 
 - Use `cn(...)` from `@/lib/utils` for conditional or merged class names — never template string interpolation.
 - Use `cva(...)` from `class-variance-authority` when a component has multiple style variants.

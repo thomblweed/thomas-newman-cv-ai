@@ -1,8 +1,3 @@
----
-description: General coding style and guidance
-alwaysApply: true
----
-
 # Coding style
 
 - Prefer **clear, declarative code** over explanatory comments.

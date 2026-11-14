@@ -1,9 +1,6 @@
----
-description: Git commit and push conventions
-alwaysApply: true
----
-
 # Git commits and pushes
+
+- The integration branch is **`main`**. There is no `develop` branch.
 
 - Use **Conventional Commits** for all commits the agent creates:
   - Common types: `feat:`, `fix:`, `chore:`, `refactor:`, `docs:`, `test:`.
@@ -18,7 +15,7 @@ alwaysApply: true
     - Prefer the combined command `pnpm turbo lint format typecheck` so lint and format run in parallel via Turborepo.
     - Optionally run narrower lint/format scopes when explicitly requested.
     - Additional checks (e.g. typecheck/tests) when the change scope warrants it.
-  - Push the **current branch** with a normal `git push` (no `--force` unless the user explicitly requests it).
+  - Push the **current branch** (and open PRs against `main`) with a normal `git push` (no `--force` unless the user explicitly requests it).
 - Never:
   - Commit secrets or obvious credentials.
   - Change git configuration.

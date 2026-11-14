@@ -1,13 +1,9 @@
----
-description: Project context + conventions for thomas-newman-cv-ai
-alwaysApply: true
----
-
 # Project context
 
 - Monorepo managed with `pnpm` + Turborepo (`turbo.json`).
-- Node version is pinned via `package.json` engines (Node `22.18.0`).
-- Apps live under `apps/` (e.g. `apps/client`).
+- Node version is pinned via `package.json` engines.
+- Apps live under `apps/`; the only app is `apps/client` (TanStack Start + React 19).
+- Feature code lives under `apps/client/src/features/<feature>/`.
 
 ## Common commands
 

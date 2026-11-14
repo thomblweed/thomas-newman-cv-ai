@@ -1,10 +1,6 @@
----
-description: React component patterns (TypeScript/TSX)
-globs: **/*.tsx
-alwaysApply: false
----
-
 # React components
+
+Applies to `**/*.tsx`.
 
 - Prefer **small, named components** over inline markup when reused or visually complex (e.g. extract SVGs into `*Icon` components).
 - Ensure components have their **own file** by default.

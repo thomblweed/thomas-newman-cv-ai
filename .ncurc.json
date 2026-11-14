@@ -1,5 +1,12 @@
 {
   "reject": [
-    "pnpm"
+    "pnpm",
+    "@tanstack/ai",
+    "@tanstack/ai-anthropic",
+    "@tanstack/ai-client",
+    "@tanstack/ai-event-client",
+    "@tanstack/ai-gemini",
+    "@tanstack/ai-ollama",
+    "@tanstack/ai-react"
   ]
 }

@@ -6,7 +6,8 @@
     "GEMINI_API_KEY",
     "ANTHROPIC_API_KEY",
     "USE_GEMINI",
-    "NODE_ENV"
+    "NODE_ENV",
+    "DEV"
   ],
   "tasks": {
     "build": {

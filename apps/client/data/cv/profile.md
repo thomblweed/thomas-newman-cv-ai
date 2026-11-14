@@ -7,7 +7,7 @@ email: thomblweed@gmail.com
 phone: please contact me on LinkedIn or Email for my phone number
 linkedin: https://www.linkedin.com/in/thomas-newman-5a50b829/
 website: https://thomblweed.dev
-years_experience: 11
+years_experience: 12
 consulting_experience: 5
 specialization: frontend
 tags: [frontend, full-stack, agile, consulting]
@@ -17,7 +17,7 @@ tags: [frontend, full-stack, agile, consulting]
 
 ## Summary
 
-Frontend Engineer with a history of full stack development and 11 years of industry experience including 5 years in consulting. Thrives in agile environments, fostering collaboration and code pairing. Demonstrates a strong passion for continuous learning and has a proven track record of quickly adapting to new technologies.
+Frontend Engineer with a history of full stack development and 12 years of industry experience including 5 years in consulting. Thrives in agile environments, fostering collaboration and code pairing. Demonstrates a strong passion for continuous learning and has a proven track record of quickly adapting to new technologies.
 
 ## Side Projects
 

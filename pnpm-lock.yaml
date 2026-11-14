@@ -51,8 +51,8 @@ importers:
         specifier: 0.7.1
         version: 0.7.1(@tanstack/ai@0.8.0)(@types/react@19.3.0)(react@19.3.1)
       '@tanstack/react-devtools':
-        specifier: 0.10.0
-        version: 0.10.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(csstype@3.2.3)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(solid-js@1.9.11)
+        specifier: 0.10.14
+        version: 0.10.14(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(csstype@3.2.3)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(solid-js@1.9.11)
       '@tanstack/react-router':
         specifier: 1.170.46
         version: 1.170.46(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -75,8 +75,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       framer-motion:
-        specifier: 12.37.0
-        version: 12.37.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: 14.14.0
+        version: 14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       gray-matter:
         specifier: 4.0.3
         version: 4.0.3
@@ -804,6 +804,15 @@ packages:
       '@emnapi/core': ^1.7.1 || 2.0.0-beta.2
       '@emnapi/runtime': ^1.7.1 || 2.0.0-beta.2
 
+  '@neodrag/core@3.0.0-next.11':
+    resolution: {integrity: sha512-3WQWxyrbxiaK9zS5JU2wJsW2gpoQlZBXVghduBh61JpqaeE0T0cte8R0qYK2RuJo3J2TYQYqxO19CpG/C1i5eg==}
+
+  '@neodrag/solid@3.0.0-next.11':
+    resolution: {integrity: sha512-vCBIn/pimjWMQ6vhTS2/O1XNAwzVtc4eUhdbQ91WykbZWWqQ5NocDXt/1OdYrEkeRzJcpCv8wEz5PnMkgKP81Q==}
+    peerDependencies:
+      '@neodrag/core': 3.0.0-next.11
+      solid-js: ^1.0.0
+
   '@oozcitak/dom@2.0.2':
     resolution: {integrity: sha512-GjpKhkSYC3Mj4+lfwEyI1dqnsKTgwGy48ytZEhm4A/xnH/8z9M3ZVXKr/YGQi3uCLs1AEBS+x5T2JPiueEDW8w==}
     engines: {node: '>=20.0'}
@@ -1476,12 +1485,12 @@ packages:
     resolution: {integrity: sha512-rcvALkrH6mSEeyZyVHaZiwXKMpNC18YKG6Ao/QDcDP68hLBnIXwYBDq+kmRWgAW6fN2VWwue+PrcH4LgB7fj1w==}
     engines: {node: '>=18'}
 
-  '@tanstack/devtools-client@0.0.6':
-    resolution: {integrity: sha512-f85ZJXJnDIFOoykG/BFIixuAevJovCvJF391LPs6YjBAPhGYC50NWlx1y4iF/UmK5/cCMx+/JqI5SBOz7FanQQ==}
+  '@tanstack/devtools-client@0.0.8':
+    resolution: {integrity: sha512-cG3iZkGWCwN330bLBKa8+9r4Of2AXNoz2zUqcsy/4XsD3105ghVBx78cGyvJj9fSclNomPxoqAnDGXXhg1WLvA==}
     engines: {node: '>=18'}
 
-  '@tanstack/devtools-event-bus@0.4.1':
-    resolution: {integrity: sha512-cNnJ89Q021Zf883rlbBTfsaxTfi2r73/qejGtyTa7ksErF3hyDyAq1aTbo5crK9dAL7zSHh9viKY1BtMls1QOA==}
+  '@tanstack/devtools-event-bus@0.4.3':
+    resolution: {integrity: sha512-NeegBt5/n2E5q4DbrXHqECBq42+kDi6JBOp8/+RNqkIE+P4hJpbM36kGyjnGQFMWOoku31qhMyX9/48VuTTdmg==}
     engines: {node: '>=18'}
 
   '@tanstack/devtools-event-client@0.4.3':
@@ -1489,18 +1498,21 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@tanstack/devtools-ui@0.5.1':
-    resolution: {integrity: sha512-T9JjAdqMSnxsVO6AQykD5vhxPF4iFLKtbYxee/bU3OLlk446F5C1220GdCmhDSz7y4lx+m8AvIS0bq6zzvdDUA==}
+  '@tanstack/devtools-event-client@0.5.1':
+    resolution: {integrity: sha512-MiBx6Ybr65MFatCnk8IJzhGxd4hvsvEap4aT0gXOC274rV4hm0UPNHxznB5KGYtu84aXrIAsJEBElqzdPe+eeg==}
     engines: {node: '>=18'}
-    peerDependencies:
-      solid-js: '>=1.9.7'
 
-  '@tanstack/devtools@0.11.0':
-    resolution: {integrity: sha512-ARRAnEm0HYjKlB2adC9YyDG3fbq5LVjpxPe6Jz583SanXRM1aKrZIGHIA//oRldX3mWIpM4kB6mCyd+CXCLqhA==}
+  '@tanstack/devtools-ui@0.7.2':
+    resolution: {integrity: sha512-Ij6EpEXkx13OOVMJPCJpMzWzVV/mcsqfXM4d+ZjqCrQtgbt7cd2rsCseuKuYNmuGhJiOLYNXzYU5da7UqCY54g==}
     engines: {node: '>=18'}
-    hasBin: true
     peerDependencies:
-      solid-js: '>=1.9.7'
+      solid-js: ^1.9.13
+
+  '@tanstack/devtools@0.16.0':
+    resolution: {integrity: sha512-SgmsZ1RwWgohY+S2GhZ1bCttZ+bICb8EKaI1DUFBrs/CXL67IaW25TouoHflj5fGzrppfDM2ld56+TLuzMwJSA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      solid-js: ^1.9.13
 
   '@tanstack/eslint-config@0.5.0':
     resolution: {integrity: sha512-ViENA1MY9G9PN+xCRPI4aVUgHWZqQdlhiAWi/Gxw9PP4rvsmlyPYx8wLm6Xw7Mb8coRUvNZt3NxKiyQCeulY7w==}
@@ -1515,8 +1527,8 @@ packages:
   '@tanstack/query-core@5.90.20':
     resolution: {integrity: sha512-OMD2HLpNouXEfZJWcKeVKUgQ5n+n3A2JFmBaScpNDUqSrQSjiveC7dKMe53uJUg1nDG16ttFPz2xfilz6i2uVg==}
 
-  '@tanstack/react-devtools@0.10.0':
-    resolution: {integrity: sha512-cUMzOQb1IHmkb8MsD0TrxHT8EL92Rx3G0Huq+IFkWeoaZPGlIiaIcGTpS5VvQDeI4BVUT+ZGt6CQTpx8oSTECg==}
+  '@tanstack/react-devtools@0.10.14':
+    resolution: {integrity: sha512-wFoNpqiU03MDbY1RljhX4vMUoGWwqpa5AZthWEaJRrojBFWFoB57lzzIM5r+EPGi+BsEX+OcXkn8Zkfoe4hGiA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@types/react': '>=16.8'
@@ -2731,18 +2743,18 @@ packages:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
 
-  framer-motion@12.37.0:
-    resolution: {integrity: sha512-j/QUcZS9Nw3NzZWoAbkzr3ETRFHyVeQMlGOUYUmG15U+uiyn9DqIktYruVPDcqY8I35qYR70JaZBvFmS6p+Pdg==}
+  framer-motion@14.14.0:
+    resolution: {integrity: sha512-fidRX0VzkZdA9OovFiBSzJtt9/jLcJpna78Z+KCqQQZIWoIpN3tOhEXAhhAw/FObUUh+o3Y18yx1F4BP0mVJ8Q==}
     peerDependencies:
-      '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
+      remix: ^3.1.0
     peerDependenciesMeta:
-      '@emotion/is-prop-valid':
-        optional: true
       react:
         optional: true
       react-dom:
+        optional: true
+      remix:
         optional: true
 
   fresh@2.0.0:
@@ -3329,11 +3341,11 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  motion-dom@12.37.0:
-    resolution: {integrity: sha512-LnppZuwX1jQizRWTl9LBLMN3RbAEmdQkX/2Af0UW70NCqYJI/7GfI83vQP9Ucel/Avc0Tf2ZWy8FHawuc0O6Vg==}
+  motion-dom@14.14.0:
+    resolution: {integrity: sha512-IAxcKhYkuQA2W0Tlx1AvVgImfqEoF3/t3IovbPQJlYkefmGsmrXjn967lMII5VmFmLpQEab4+ZkHo/ijJ4Esig==}
 
-  motion-utils@12.36.0:
-    resolution: {integrity: sha512-eHWisygbiwVvf6PZ1vhaHCLamvkSbPIeAYxWUuL3a2PD/TROgE7FvfHWTIH4vMl798QLfMw15nRqIaRDXTlYRg==}
+  motion-utils@14.7.0:
+    resolution: {integrity: sha512-woO0/Nb7ys75f94fjvQi/6leiHGvZUYkeHUPEZ3vxsV+9OpEVhkxp01x8MlRwX0zt31EqgXsKDAoBoJLC148Tw==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -4866,6 +4878,13 @@ snapshots:
       '@tybys/wasm-util': 0.10.4
     optional: true
 
+  '@neodrag/core@3.0.0-next.11': {}
+
+  '@neodrag/solid@3.0.0-next.11(@neodrag/core@3.0.0-next.11)(solid-js@1.9.11)':
+    dependencies:
+      '@neodrag/core': 3.0.0-next.11
+      solid-js: 1.9.11
+
   '@oozcitak/dom@2.0.2':
     dependencies:
       '@oozcitak/infra': 2.0.2
@@ -5371,20 +5390,22 @@ snapshots:
       '@tanstack/ai-event-client': 0.1.0(@tanstack/ai@0.8.0)
       partial-json: 0.1.7
 
-  '@tanstack/devtools-client@0.0.6':
+  '@tanstack/devtools-client@0.0.8':
     dependencies:
-      '@tanstack/devtools-event-client': 0.4.3
+      '@tanstack/devtools-event-client': 0.5.1
 
-  '@tanstack/devtools-event-bus@0.4.1':
+  '@tanstack/devtools-event-bus@0.4.3':
     dependencies:
-      ws: 8.19.0
+      ws: 8.23.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
   '@tanstack/devtools-event-client@0.4.3': {}
 
-  '@tanstack/devtools-ui@0.5.1(csstype@3.2.3)(solid-js@1.9.11)':
+  '@tanstack/devtools-event-client@0.5.1': {}
+
+  '@tanstack/devtools-ui@0.7.2(csstype@3.2.3)(solid-js@1.9.11)':
     dependencies:
       clsx: 2.1.1
       dayjs: 1.11.20
@@ -5393,14 +5414,16 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  '@tanstack/devtools@0.11.0(csstype@3.2.3)(solid-js@1.9.11)':
+  '@tanstack/devtools@0.16.0(csstype@3.2.3)(solid-js@1.9.11)':
     dependencies:
+      '@neodrag/core': 3.0.0-next.11
+      '@neodrag/solid': 3.0.0-next.11(@neodrag/core@3.0.0-next.11)(solid-js@1.9.11)
       '@solid-primitives/event-listener': 2.4.3(solid-js@1.9.11)
       '@solid-primitives/keyboard': 1.3.3(solid-js@1.9.11)
       '@solid-primitives/resize-observer': 2.1.3(solid-js@1.9.11)
-      '@tanstack/devtools-client': 0.0.6
-      '@tanstack/devtools-event-bus': 0.4.1
-      '@tanstack/devtools-ui': 0.5.1(csstype@3.2.3)(solid-js@1.9.11)
+      '@tanstack/devtools-client': 0.0.8
+      '@tanstack/devtools-event-bus': 0.4.3
+      '@tanstack/devtools-ui': 0.7.2(csstype@3.2.3)(solid-js@1.9.11)
       clsx: 2.1.1
       goober: 2.1.18(csstype@3.2.3)
       solid-js: 1.9.11
@@ -5429,9 +5452,9 @@ snapshots:
 
   '@tanstack/query-core@5.90.20': {}
 
-  '@tanstack/react-devtools@0.10.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(csstype@3.2.3)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(solid-js@1.9.11)':
+  '@tanstack/react-devtools@0.10.14(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(csstype@3.2.3)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(solid-js@1.9.11)':
     dependencies:
-      '@tanstack/devtools': 0.11.0(csstype@3.2.3)(solid-js@1.9.11)
+      '@tanstack/devtools': 0.16.0(csstype@3.2.3)(solid-js@1.9.11)
       '@types/react': 19.3.0
       '@types/react-dom': 19.3.0(@types/react@19.3.0)
       react: 19.3.1
@@ -6804,10 +6827,10 @@ snapshots:
   forwarded@0.2.0:
     optional: true
 
-  framer-motion@12.37.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  framer-motion@14.14.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
-      motion-dom: 12.37.0
-      motion-utils: 12.36.0
+      motion-dom: 14.14.0
+      motion-utils: 14.7.0
       tslib: 2.8.1
     optionalDependencies:
       react: 19.3.1
@@ -7633,11 +7656,11 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  motion-dom@12.37.0:
+  motion-dom@14.14.0:
     dependencies:
-      motion-utils: 12.36.0
+      motion-utils: 14.7.0
 
-  motion-utils@12.36.0: {}
+  motion-utils@14.7.0: {}
 
   mrmime@2.0.1: {}
 

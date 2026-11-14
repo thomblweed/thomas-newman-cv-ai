@@ -17,26 +17,16 @@ pnpm install
 
 Scripts run via `pnpm turbo <task>` (Turborepo is a local dev dependency).
 
-### Option A — Ollama (local model)
+### Gemini (free tier)
 
-> **Note:** Local models are fine for basic dev testing but expect slower responses and lower quality output. Performance depends on your machine's CPU/GPU, and smaller local models are less capable than cloud alternatives — responses may be less accurate or coherent. For more realistic testing of AI output quality, use Option B instead.
-
-1. Install [Ollama](https://ollama.com) and start it (macOS/Windows: app runs automatically; Linux: `ollama serve`)
-2. Pull the model: `ollama pull mistral-nemo:12b`
-3. Create `apps/client/.env`:
-   ```
-   OLLAMA_HOST=http://localhost:11434
-   ```
-4. Start the dev server: `pnpm turbo dev`
-
-### Option B — Gemini (free tier)
+Development uses Gemini as the provider; production uses Anthropic.
 
 1. Get a free API key at [Google AI Studio](https://aistudio.google.com/app/apikey)
 2. Create `apps/client/.env`:
    ```
    GEMINI_API_KEY=your-key-here
    ```
-3. Start the dev server: `pnpm turbo dev:gemini`
+3. Start the dev server: `pnpm turbo dev`
 
 ### Other scripts
 

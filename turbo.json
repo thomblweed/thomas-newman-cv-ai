@@ -1,14 +1,7 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
-  "globalEnv": [
-    "OLLAMA_HOST",
-    "GEMINI_API_KEY",
-    "ANTHROPIC_API_KEY",
-    "USE_GEMINI",
-    "NODE_ENV",
-    "DEV"
-  ],
+  "globalEnv": ["GEMINI_API_KEY", "ANTHROPIC_API_KEY", "NODE_ENV", "DEV"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -30,10 +23,6 @@
       "cache": false
     },
     "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "dev:gemini": {
       "cache": false,
       "persistent": true
     },

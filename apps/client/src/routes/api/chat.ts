@@ -11,8 +11,10 @@ import { createFileRoute } from '@tanstack/react-router';
 import type { ChatErrorCode } from '@/server/response/chatErrorCode';
 
 import { createErrorResponse } from '@/server/response/error.server';
-import { getApiKey } from '@/server/env/env.server';
-import { getAdapter } from '@/features/chat/server/ai/adapter.server';
+import {
+  getAdapter,
+  getProviderApiKey
+} from '@/features/chat/server/ai/adapter.server';
 import { getSystemPrompt } from '@/features/chat/ai/system/prompt';
 import { profileToolServer } from '@/features/chat/ai/tools/profile/server';
 import { rolesToolServer } from '@/features/chat/ai/tools/roles/server';
@@ -86,7 +88,7 @@ function extractRetryAfter(error: Error): number | undefined {
 }
 
 export async function POST({ request }: { request: Request }) {
-  const { apiKey, apiKeyName } = getApiKey();
+  const { apiKey, apiKeyName } = getProviderApiKey();
 
   if (!apiKey) {
     return createErrorResponse(new Error(`${apiKeyName} not configured`), {

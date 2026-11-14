@@ -4,7 +4,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3000",
-    "dev:gemini": "USE_GEMINI=true pnpm dev",
     "start": "node .output/server/index.mjs",
     "build": "vite build",
     "serve": "vite preview",
@@ -21,7 +20,6 @@
     "@tanstack/ai-anthropic": "1.1.1",
     "@tanstack/ai-client": "1.1.0",
     "@tanstack/ai-gemini": "1.2.2",
-    "@tanstack/ai-ollama": "1.1.1",
     "@tanstack/ai-react": "1.0.2",
     "@tanstack/react-devtools": "0.10.14",
     "@tanstack/react-router": "1.170.46",

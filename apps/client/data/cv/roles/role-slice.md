@@ -3,8 +3,8 @@ type: role
 company: Slice
 title: Senior Frontend Engineer
 period_start: 2025-07
-period_end: present
-duration_months: ongoing
+period_end: 2026-05
+duration_months: 10
 employment_type: full-time
 industry: saas, food-tech
 team_type: web

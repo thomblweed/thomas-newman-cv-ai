@@ -102,19 +102,19 @@ Sole Senior Frontend Engineer and frontend tech lead for the team. The team's ap
 
 ### Frontend Direction
 
-Owning the frontend technical direction for the team: architecture, patterns, coding standards and tooling.
+Leading the team's frontend direction: architecture, patterns, coding standards and tooling choices.
 
 ### Feature Delivery
 
-Delivering features end-to-end from Figma designs to production UI, including the shared component library.
+Building product features end to end, from Figma designs to production UI, and contributing to the shared component library.
 
 ### Frontend Quality
 
-Owning frontend quality and delivery: unit and acceptance testing with Vitest and Playwright, CI, releases and dependency upkeep.
+Owning frontend quality and delivery: testing (Vitest, Playwright), CI, releases and dependency upkeep.
 
 ### Platform Integration
 
-Working with the platform team on the host application and shared dependencies.
+Working with the platform team to integrate with the host application and keep shared dependencies aligned.
 
 ### Story Shaping
 
@@ -124,11 +124,11 @@ Turning product requirements into well-scoped, testable vertical-slice stories.
 
 ### Product Features
 
-Delivered major product features including network assurance workflows, secure credential management and a redesigned job-creation flow, shipped behind feature flags.
+Delivered major product features, including network assurance workflows, secure credential management and a redesigned job-creation flow, rolled out behind feature flags.
 
 ### Monorepo Restructure
 
-Restructured the application by feature into an npm workspaces monorepo with shared generated-API-types and tooling-config packages.
+Restructured the codebase into feature-based modules and an npm workspaces monorepo with shared packages for generated API types and tooling config.
 
 ### Data & UI Standardisation
 
@@ -136,8 +136,11 @@ Standardised the data and UI layer on TanStack Query, Form (with Zod) and Table,
 
 ### Performance Optimisation
 
-Improved performance by cutting unnecessary re-renders, lazy-loading routes and reducing bundle sizes.
+Improved performance by cutting unnecessary re-renders, lazy-loading routes and shrinking bundles.
 
 ### AI-Assisted Development
 
-Introduced AI-assisted development with agent documentation, Claude Code skills and an end-to-end delivery workflow sustaining around 50 delivered tickets a month, including the AI-guided planning session that settles a feature's decisions and files a vertical-slice story with Gherkin acceptance criteria, plan and decision records, and the Archon harness that builds each planned ticket in its own git worktree with parallel AI reviews feeding a single fix step and lint, typecheck and tests after every stage.
+Introduced AI-assisted development to the codebase, with agent documentation, Claude Code skills and an end-to-end delivery workflow that has helped sustain around 50 delivered tickets a month.
+
+- Planning: an AI-guided session settles every open decision on a feature, then files a vertical-slice story with Gherkin acceptance criteria, the agreed plan and decision records
+- Delivery (Archon harness): each planned ticket is built in its own git worktree so several run at once, with parallel AI reviews feeding a single fix step, and linting, type checks and tests after every stage

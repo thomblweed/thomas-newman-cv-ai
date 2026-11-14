@@ -2,9 +2,9 @@ import { ContactInfo } from './components/contact-info';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-interface FooterProps {
+type FooterProps = {
   footerText: string;
-}
+};
 
 export const Footer = ({ footerText }: FooterProps) => (
   <footer className="py-4 px-0">

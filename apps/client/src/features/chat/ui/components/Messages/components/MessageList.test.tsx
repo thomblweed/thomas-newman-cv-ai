@@ -23,10 +23,8 @@ vi.mock('../../../context/useChatContext', () => ({
 }));
 
 vi.mock('./ChatScrollContainer', () => ({
-  useChatScroll: () => ({
-    isPinnedToBottom: mockIsPinnedToBottom,
-    scrollToBottom: mockScrollToBottom
-  })
+  useChatScrollPinned: () => mockIsPinnedToBottom,
+  useChatScrollActions: () => mockScrollToBottom
 }));
 
 vi.mock('./MessageItem', () => ({

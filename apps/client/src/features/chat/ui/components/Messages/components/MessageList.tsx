@@ -6,13 +6,17 @@ import {
 } from '../../../context/useChatContext';
 
 import { MessageItem } from './MessageItem';
-import { useChatScroll } from './ChatScrollContainer';
+import {
+  useChatScrollActions,
+  useChatScrollPinned
+} from './ChatScrollContainer';
 import { WaitingIndicator } from './WaitingIndicator';
 
 export const MessageList = () => {
   const { messages } = useChatMessages();
   const { isLoading } = useChatStatus();
-  const { isPinnedToBottom, scrollToBottom } = useChatScroll();
+  const isPinnedToBottom = useChatScrollPinned();
+  const scrollToBottom = useChatScrollActions();
 
   const lastMessage = messages.at(-1);
 

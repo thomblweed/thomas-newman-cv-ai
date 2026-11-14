@@ -37,24 +37,26 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="" className="h-full">
+    <html lang="en" className="h-full">
       <head>
         <HeadContent />
       </head>
       <body className="bg-dark text-grey">
         {children}
         <Scripts />
-        <TanStackDevtools
-          config={{
-            position: 'bottom-left'
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />
-            }
-          ]}
-        />
+        {import.meta.env.DEV ? (
+          <TanStackDevtools
+            config={{
+              position: 'bottom-left'
+            }}
+            plugins={[
+              {
+                name: 'Tanstack Router',
+                render: <TanStackRouterDevtoolsPanel />
+              }
+            ]}
+          />
+        ) : null}
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import { ThinkingIndicator } from './ThinkingIndicator';
 import type { ChatContextType } from '../../../types/ChatContext.type';
 
 type Message = ChatContextType['messages'][number];
+type MessagePart = Message['parts'][number];
 
 type Props = {
   message: Message;
@@ -21,6 +22,17 @@ const hasRenderableText = (message: Message) =>
       part.content.trim().length > 0
   );
 
+const keyPartsByType = (parts: Message['parts']) => {
+  const occurrences = new Map<MessagePart['type'], number>();
+
+  return parts.map((part) => {
+    const occurrence = occurrences.get(part.type) ?? 0;
+    occurrences.set(part.type, occurrence + 1);
+
+    return { key: `${part.type}-${occurrence}`, part };
+  });
+};
+
 export const MessageItem = ({ message, onContentUpdate }: Props) => {
   const isAssistant = message.role === 'assistant';
 
@@ -28,15 +40,15 @@ export const MessageItem = ({ message, onContentUpdate }: Props) => {
 
   return (
     <MessageBubble variant={isAssistant ? 'assistant' : 'user'}>
-      {message.parts.map((part, idx) => {
+      {keyPartsByType(message.parts).map(({ key, part }) => {
         if (part.type === 'thinking') {
-          return <ThinkingIndicator key={idx} />;
+          return <ThinkingIndicator key={key} />;
         }
 
         if (part.type === 'text' && isAssistant) {
           return (
             <AnimatedMarkdownMessage
-              key={idx}
+              key={key}
               content={part.content}
               onContentUpdate={onContentUpdate}
             />
@@ -44,7 +56,7 @@ export const MessageItem = ({ message, onContentUpdate }: Props) => {
         }
 
         if (part.type === 'text' && !isAssistant) {
-          return <MarkdownMessage key={idx} content={part.content} />;
+          return <MarkdownMessage key={key} content={part.content} />;
         }
 
         return null;

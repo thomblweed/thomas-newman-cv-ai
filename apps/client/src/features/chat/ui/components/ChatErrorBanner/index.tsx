@@ -39,8 +39,8 @@ export const ChatErrorBanner = () => {
       <AlertBody>
         <AlertMessages>
           <p className="font-medium text-bright">{errorMessages[kind]}</p>
-          {waitMessage && <p className="text-grey">{waitMessage}</p>}
-          {kind === 'rate_limit' && retryAt && (
+          {waitMessage ? <p className="text-grey">{waitMessage}</p> : null}
+          {kind === 'rate_limit' && retryAt ? (
             <p className="text-grey">
               Try again after{' '}
               <span className="font-medium text-primary">
@@ -48,8 +48,8 @@ export const ChatErrorBanner = () => {
               </span>
               .
             </p>
-          )}
-          {kind === 'token_limit' && retryAt && (
+          ) : null}
+          {kind === 'token_limit' && retryAt ? (
             <p className="text-grey">
               Estimated reset:{' '}
               <span className="font-medium text-primary">
@@ -57,15 +57,15 @@ export const ChatErrorBanner = () => {
               </span>
               .
             </p>
-          )}
+          ) : null}
         </AlertMessages>
-        {showRetryButton && (
+        {showRetryButton ? (
           <RetryButton
             onClick={reload}
             disabled={retryDisabled}
             className="self-start"
           />
-        )}
+        ) : null}
       </AlertBody>
     </AlertLayout>
   );

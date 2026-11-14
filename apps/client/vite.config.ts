@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
-import viteReact from '@vitejs/plugin-react';
+import viteReact, { reactCompilerPreset } from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 import tailwindcss from '@tailwindcss/vite';
 
 const config = defineConfig({
@@ -15,10 +16,9 @@ const config = defineConfig({
   plugins: [
     tailwindcss(),
     tanstackStart(),
-    viteReact({
-      babel: {
-        plugins: ['babel-plugin-react-compiler']
-      }
+    viteReact(),
+    babel({
+      presets: [reactCompilerPreset()]
     })
   ]
 });

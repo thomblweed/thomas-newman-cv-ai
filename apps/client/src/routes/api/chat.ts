@@ -1,6 +1,11 @@
 import '@tanstack/react-start/server-only';
 
-import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai';
+import {
+  chat,
+  chatParamsFromRequestBody,
+  maxIterations,
+  toServerSentEventsResponse
+} from '@tanstack/ai';
 import { createFileRoute } from '@tanstack/react-router';
 
 import type { ChatErrorCode } from '@/server/response/chatErrorCode';
@@ -90,19 +95,21 @@ export async function POST({ request }: { request: Request }) {
     });
   }
 
-  const { messages, conversationId } = await request.json();
+  const { messages, threadId } = await chatParamsFromRequestBody(
+    await request.json()
+  );
 
   try {
-    const adapter = await getAdapter();
+    const { adapter, modelOptions } = await getAdapter();
 
     const stream = chat({
       adapter,
       messages,
-      conversationId,
+      threadId,
       systemPrompts: [getSystemPrompt()],
       tools: [profileToolServer, rolesToolServer],
       agentLoopStrategy: maxIterations(5),
-      maxTokens: 1024
+      modelOptions
     });
 
     return toServerSentEventsResponse(stream);

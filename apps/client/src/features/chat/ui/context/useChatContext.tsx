@@ -4,7 +4,7 @@ import {
   useChat
 } from '@tanstack/ai-react';
 import { clientTools } from '@tanstack/ai-client';
-import { createContext, use, useMemo } from 'react';
+import { createContext, use, useMemo, useState } from 'react';
 
 import { profileToolClient } from '../../ai/tools/profile/client';
 import { rolesToolClient } from '../../ai/tools/roles/client';
@@ -14,13 +14,8 @@ import type { ReactNode } from 'react';
 import type { ChatContextType } from '../types/ChatContext.type';
 import type { ChatErrorCode } from '@/server/response/chatErrorCode';
 
-const chatClientOptions = createChatClientOptions({
-  connection: fetchServerSentEvents('/api/chat'),
-  tools: clientTools(profileToolClient, rolesToolClient)
-  // onChunk: (chunk) => {
-  //   console.log('Chunk type:', chunk.type, chunk);
-  // }
-});
+const connection = fetchServerSentEvents('/api/chat');
+const tools = clientTools(profileToolClient, rolesToolClient);
 
 type ChatActions = Pick<ChatContextType, 'sendMessage' | 'stop' | 'reload'>;
 type ChatStatus = Pick<ChatContextType, 'isLoading' | 'error'> & {
@@ -35,6 +30,15 @@ const ChatStatusContext = createContext<ChatStatus | undefined>(undefined);
 const ChatMessagesContext = createContext<ChatMessages | undefined>(undefined);
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
+  const [threadId] = useState(() => crypto.randomUUID());
+  const chatClientOptions = createChatClientOptions({
+    connection,
+    threadId,
+    tools
+    // onChunk: (chunk) => {
+    //   console.log('Chunk type:', chunk.type, chunk);
+    // }
+  });
   const chat = useChat(chatClientOptions);
 
   const actions = useMemo<ChatActions>(

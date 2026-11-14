@@ -24,7 +24,6 @@ type ChatStatus = Pick<ChatContextType, 'isLoading' | 'error'> & {
 };
 type ChatMessages = Pick<ChatContextType, 'messages'>;
 
-const ChatContext = createContext<ChatContextType | undefined>(undefined);
 const ChatActionsContext = createContext<ChatActions | undefined>(undefined);
 const ChatStatusContext = createContext<ChatStatus | undefined>(undefined);
 const ChatMessagesContext = createContext<ChatMessages | undefined>(undefined);
@@ -71,24 +70,12 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   );
 
   return (
-    <ChatContext value={chat}>
-      <ChatActionsContext value={actions}>
-        <ChatStatusContext value={status}>
-          <ChatMessagesContext value={messages}>{children}</ChatMessagesContext>
-        </ChatStatusContext>
-      </ChatActionsContext>
-    </ChatContext>
+    <ChatActionsContext value={actions}>
+      <ChatStatusContext value={status}>
+        <ChatMessagesContext value={messages}>{children}</ChatMessagesContext>
+      </ChatStatusContext>
+    </ChatActionsContext>
   );
-};
-
-export const useChatContext = () => {
-  const context = use(ChatContext);
-
-  if (context === undefined) {
-    throw new Error('useChatContext must be used within a ChatProvider');
-  }
-
-  return context;
 };
 
 export const useChatActions = () => {

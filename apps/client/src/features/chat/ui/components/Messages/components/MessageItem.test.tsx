@@ -121,3 +121,28 @@ it('should render thinking and text parts together for an assistant message', ()
     'Final answer'
   );
 });
+
+it('should keep the animated message mounted when a leading thinking part is dropped', () => {
+  const { rerender } = render(
+    <MessageItem
+      message={makeMessage('assistant', [
+        { type: 'thinking', content: '' },
+        { type: 'text', content: 'Streaming answer' }
+      ])}
+      onContentUpdate={onContentUpdate}
+    />
+  );
+
+  const mountedAnimatedMessage = screen.getByTestId('animated-markdown');
+
+  rerender(
+    <MessageItem
+      message={makeMessage('assistant', [
+        { type: 'text', content: 'Streaming answer' }
+      ])}
+      onContentUpdate={onContentUpdate}
+    />
+  );
+
+  expect(screen.getByTestId('animated-markdown')).toBe(mountedAnimatedMessage);
+});

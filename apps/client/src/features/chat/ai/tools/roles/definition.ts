@@ -7,13 +7,25 @@ export const rolesToolInputSchema = z.object({
   months: z
     .number()
     .optional()
-    .describe('Number of months to look back from today')
+    .describe('Number of months to look back from today'),
+  company: z
+    .string()
+    .optional()
+    .describe(
+      'Free-text company or client name to narrow the roles to, matched case-insensitively against both. Use it when the question is about one company or project, e.g. "what did you do at Slice?" → {"company": "Slice"}'
+    ),
+  sections: z
+    .array(z.enum(['tech', 'responsibilities', 'achievements']))
+    .optional()
+    .describe(
+      'Which parts of the answer the question is about, controlling the answer card the interface renders: "tech" for the tech stack, "responsibilities" for what was done, "achievements" for outcomes, or any combination. E.g. "what tech did you use at Slice?" → ["tech"], "what did you achieve at Ensono?" → ["achievements"]. Omit for a career overview; pass [] only when a question needs the tool but should render no card. It never changes what the tool returns.'
+    )
 });
 
 export const rolesToolDefinition = toolDefinition({
   name: 'get_roles',
   description:
-    "Get Thomas Newman's professional roles and work experience, including company, client, title, period, responsibilities, achievements, and tech stack.",
+    "Get Thomas Newman's professional roles and work experience, including company, client, title, period, responsibilities, achievements, and tech stack. Pass `company` to narrow to one company or client, and `sections` to say which parts of the answer the question is about.",
   inputSchema: rolesToolInputSchema,
   outputSchema: z.array(
     z.object({

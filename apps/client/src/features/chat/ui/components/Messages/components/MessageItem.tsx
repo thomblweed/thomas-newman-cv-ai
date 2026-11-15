@@ -1,4 +1,7 @@
+import { AnswerCard } from '../../AnswerCard';
 import { MarkdownMessage } from '../../MarkdownMessage';
+import { messageDrawsContent } from '../../../utils/messageDrawsContent';
+import { getAnswerCardData } from '../../../utils/resolveAnswerCard';
 
 import { AnimatedMarkdownMessage } from './AnimatedMarkdownMessage';
 import { MessageBubble } from './MessageBubble';
@@ -14,14 +17,6 @@ type Props = {
   onContentUpdate: () => void;
 };
 
-const hasRenderableText = (message: Message) =>
-  message.parts.some(
-    (part) =>
-      part.type === 'text' &&
-      typeof part.content === 'string' &&
-      part.content.trim().length > 0
-  );
-
 const keyPartsByType = (parts: Message['parts']) => {
   const occurrences = new Map<MessagePart['type'], number>();
 
@@ -36,7 +31,7 @@ const keyPartsByType = (parts: Message['parts']) => {
 export const MessageItem = ({ message, onContentUpdate }: Props) => {
   const isAssistant = message.role === 'assistant';
 
-  if (isAssistant && !hasRenderableText(message)) return null;
+  if (isAssistant && !messageDrawsContent(message)) return null;
 
   return (
     <MessageBubble variant={isAssistant ? 'assistant' : 'user'}>
@@ -57,6 +52,21 @@ export const MessageItem = ({ message, onContentUpdate }: Props) => {
 
         if (part.type === 'text' && !isAssistant) {
           return <MarkdownMessage key={key} content={part.content} />;
+        }
+
+        if (part.type === 'tool-call' && isAssistant) {
+          const data = getAnswerCardData(part);
+
+          if (!data) return null;
+
+          return data.roles.map((role) => (
+            <AnswerCard
+              key={`${part.id}-${role.company}-${role.period_start}`}
+              role={role}
+              sectionsHint={data.sectionsHint}
+              roleCount={data.roles.length}
+            />
+          ));
         }
 
         return null;

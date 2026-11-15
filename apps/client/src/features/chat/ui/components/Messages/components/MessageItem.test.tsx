@@ -18,12 +18,49 @@ vi.mock('../../MarkdownMessage', () => ({
   )
 }));
 
+vi.mock('../../AnswerCard', () => ({
+  AnswerCard: ({ role }: { role: { company: string } }) => (
+    <div data-testid="answer-card">{role.company}</div>
+  )
+}));
+
 type TestMessage = Parameters<typeof MessageItem>[0]['message'];
 
 const makeMessage = (
   role: 'user' | 'assistant',
   parts: TestMessage['parts']
 ): TestMessage => ({ role, parts }) as TestMessage;
+
+const makeRole = (company: string) => ({
+  type: 'role',
+  company,
+  title: 'Senior Frontend Engineer',
+  period_start: '2025-07',
+  duration_months: 10,
+  employment_type: 'full-time',
+  tech_stack: ['react'],
+  content: '## Responsibilities\n\n### Delivery\n\nShipped new features'
+});
+
+const toolCallPart = ({
+  name = 'get_roles',
+  state = 'complete',
+  arguments: args = '{}',
+  output
+}: {
+  name?: string;
+  state?: string;
+  arguments?: string;
+  output?: unknown;
+}) =>
+  ({
+    type: 'tool-call',
+    id: 'tool-call-1',
+    name,
+    arguments: args,
+    state,
+    output
+  }) as TestMessage['parts'][number];
 
 const onContentUpdate = vi.fn();
 
@@ -53,13 +90,11 @@ it('should render an assistant message', () => {
   );
 });
 
-it('should render nothing when an assistant message has no text parts', () => {
+it('should render a thinking indicator when an assistant message has only a thinking part', () => {
   const message = makeMessage('assistant', [{ type: 'thinking', content: '' }]);
-  const { container } = render(
-    <MessageItem message={message} onContentUpdate={onContentUpdate} />
-  );
+  render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);
 
-  expect(container).toBeEmptyDOMElement();
+  expect(screen.getByText('Assistant is thinking')).toBeInTheDocument();
 });
 
 it('should render nothing when an assistant message has only whitespace text', () => {
@@ -145,4 +180,95 @@ it('should keep the animated message mounted when a leading thinking part is dro
   );
 
   expect(screen.getByTestId('animated-markdown')).toBe(mountedAnimatedMessage);
+});
+
+describe('When an assistant message carries a completed get_roles call', () => {
+  it('should render one answer card per returned role', () => {
+    const message = makeMessage('assistant', [
+      toolCallPart({ output: [makeRole('Slice'), makeRole('Ensono')] })
+    ]);
+
+    render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);
+
+    expect(screen.getAllByTestId('answer-card')).toHaveLength(2);
+  });
+
+  it('should render the cards before the assistant prose', () => {
+    const message = makeMessage('assistant', [
+      toolCallPart({ output: [makeRole('Slice')] }),
+      { type: 'text', content: 'Here are the roles' }
+    ]);
+
+    render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);
+
+    const card = screen.getByTestId('answer-card');
+    const prose = screen.getByTestId('animated-markdown');
+
+    expect(
+      card.compareDocumentPosition(prose) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+  });
+
+  it('should render no bubble when the call suppresses every card and has no prose', () => {
+    const message = makeMessage('assistant', [
+      toolCallPart({
+        arguments: '{"sections":[]}',
+        output: [makeRole('Slice')]
+      })
+    ]);
+
+    const { container } = render(
+      <MessageItem message={message} onContentUpdate={onContentUpdate} />
+    );
+
+    expect(container).toBeEmptyDOMElement();
+  });
+});
+
+it('should only render an answer card once the get_roles call is complete', () => {
+  const { rerender, container } = render(
+    <MessageItem
+      message={makeMessage('assistant', [
+        toolCallPart({ state: 'input-complete' })
+      ])}
+      onContentUpdate={onContentUpdate}
+    />
+  );
+
+  expect(container).toBeEmptyDOMElement();
+
+  rerender(
+    <MessageItem
+      message={makeMessage('assistant', [
+        toolCallPart({ output: [makeRole('Slice')] })
+      ])}
+      onContentUpdate={onContentUpdate}
+    />
+  );
+
+  expect(screen.getByTestId('answer-card')).toBeInTheDocument();
+});
+
+it('should only render answer cards for a get_roles call, not other tools', () => {
+  const { rerender } = render(
+    <MessageItem
+      message={makeMessage('assistant', [
+        toolCallPart({ name: 'get_profile', output: { email: 'a@b.com' } })
+      ])}
+      onContentUpdate={onContentUpdate}
+    />
+  );
+
+  expect(screen.queryByTestId('answer-card')).not.toBeInTheDocument();
+
+  rerender(
+    <MessageItem
+      message={makeMessage('assistant', [
+        toolCallPart({ output: [makeRole('Slice')] })
+      ])}
+      onContentUpdate={onContentUpdate}
+    />
+  );
+
+  expect(screen.getByTestId('answer-card')).toBeInTheDocument();
 });

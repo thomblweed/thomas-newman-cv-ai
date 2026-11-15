@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import { readMarkdownFile } from '../markdown/markdown.server';
+import { parseRoleContent } from '../../utils/parseRoleContent';
 
 import type { Role } from '../../interfaces/role.interface';
 
@@ -9,6 +10,7 @@ interface GetRolesOptions {
   startDate?: string;
   endDate?: string;
   months?: number;
+  company?: string;
 }
 
 const dataPath = path.join(process.cwd(), 'data/cv/roles');
@@ -28,6 +30,17 @@ const isDateInRange = (
   if (filterEnd && roleStartDate > filterEnd) return false;
 
   return true;
+};
+
+const matchesCompany = (role: Role, company: string | undefined): boolean => {
+  if (!company) return true;
+
+  const needle = company.toLowerCase();
+
+  return (
+    role.company.toLowerCase().includes(needle) ||
+    role.client?.toLowerCase().includes(needle) === true
+  );
 };
 
 export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
@@ -50,6 +63,7 @@ export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
   const roles = await Promise.all(
     roleFiles.map(async (file) => {
       const { frontmatter, content } = await readMarkdownFile(`roles/${file}`);
+      const { responsibilities, achievements } = parseRoleContent(content);
 
       let durationMonths: number;
       if (
@@ -79,12 +93,8 @@ export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
         ownership: frontmatter.ownership,
         tags: frontmatter.tags,
         seniority: frontmatter.seniority,
-        responsibilities_count: frontmatter.responsibilities_count
-          ? Number(frontmatter.responsibilities_count)
-          : undefined,
-        achievements_count: frontmatter.achievements_count
-          ? Number(frontmatter.achievements_count)
-          : undefined,
+        responsibilities_count: responsibilities.length,
+        achievements_count: achievements.length,
         promotion: frontmatter.promotion,
         tech_stack: frontmatter.tech_stack,
         content
@@ -92,9 +102,11 @@ export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
     })
   );
 
-  const filteredRoles = roles.filter((role) =>
-    isDateInRange(role.period_start, role.period_end, startDate, endDate)
-  );
+  const filteredRoles = roles
+    .filter((role) =>
+      isDateInRange(role.period_start, role.period_end, startDate, endDate)
+    )
+    .filter((role) => matchesCompany(role, options?.company));
 
   return filteredRoles.sort((a, b) => {
     if (b.period_start < a.period_start) return -1;

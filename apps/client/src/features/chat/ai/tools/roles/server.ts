@@ -10,7 +10,8 @@ export const rolesToolServer = rolesToolDefinition.server(
     return await getRoles({
       startDate: input.startDate,
       endDate: input.endDate,
-      months: input.months
+      months: input.months,
+      company: input.company
     });
   }
 );

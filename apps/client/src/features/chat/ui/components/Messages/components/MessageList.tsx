@@ -4,6 +4,7 @@ import {
   useChatMessages,
   useChatStatus
 } from '../../../context/useChatContext';
+import { messageDrawsContent } from '../../../utils/messageDrawsContent';
 
 import { MessageItem } from './MessageItem';
 import {
@@ -27,14 +28,7 @@ export const MessageList = () => {
       .join('') ?? '';
 
   const assistantHasVisibleContent =
-    lastMessage?.role === 'assistant' &&
-    lastMessage.parts?.some(
-      (p) =>
-        p.type === 'thinking' ||
-        (p.type === 'text' &&
-          typeof p.content === 'string' &&
-          p.content.trim().length > 0)
-    );
+    lastMessage?.role === 'assistant' && messageDrawsContent(lastMessage);
 
   const showWaitingIndicator = isLoading && !assistantHasVisibleContent;
 

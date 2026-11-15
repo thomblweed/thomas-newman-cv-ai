@@ -33,12 +33,20 @@ it('should render a full card for a single role with no hint', () => {
   expect(screen.queryByRole('group')).not.toBeInTheDocument();
 });
 
-it('should render a compact card when several roles answer', () => {
+it('should render a compact card when exactly two roles answer', () => {
   render(
-    <AnswerCard role={makeRole()} sectionsHint={undefined} roleCount={3} />
+    <AnswerCard role={makeRole()} sectionsHint={undefined} roleCount={2} />
   );
 
   expect(screen.getByRole('group')).toBeInTheDocument();
+});
+
+it('should render no card for a single role when three or more roles answer', () => {
+  const { container } = render(
+    <AnswerCard role={makeRole()} sectionsHint={undefined} roleCount={3} />
+  );
+
+  expect(container).toBeEmptyDOMElement();
 });
 
 it('should render a full card limited to the hinted sections', () => {
@@ -46,7 +54,7 @@ it('should render a full card limited to the hinted sections', () => {
     <AnswerCard
       role={makeRole()}
       sectionsHint={['responsibilities']}
-      roleCount={3}
+      roleCount={1}
     />
   );
 
@@ -55,6 +63,24 @@ it('should render a full card limited to the hinted sections', () => {
   expect(
     screen.getByRole('heading', { name: 'Responsibilities' })
   ).toBeInTheDocument();
+});
+
+it('should render a period row for a period hint', () => {
+  render(
+    <AnswerCard role={makeRole()} sectionsHint={['period']} roleCount={1} />
+  );
+
+  expect(screen.getByRole('heading', { name: 'Period' })).toBeInTheDocument();
+  expect(screen.getByText('Jul 2025 – May 2026')).toBeInTheDocument();
+  expect(screen.getByText('10 months')).toBeInTheDocument();
+});
+
+it('should add the period to the count line of a compact card', () => {
+  render(
+    <AnswerCard role={makeRole()} sectionsHint={['period']} roleCount={2} />
+  );
+
+  expect(screen.getByText(/^10 months · /)).toBeInTheDocument();
 });
 
 it('should render nothing when the sections hint is empty', () => {

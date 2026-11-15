@@ -96,6 +96,19 @@ describe('When a message carries a get_roles call', () => {
     ).toBe(false);
   });
 
+  it('should draw content for a list card even when the roles have no sections', () => {
+    const role = makeRole({
+      content: '# A role with no lists',
+      tech_stack: []
+    });
+
+    expect(
+      messageDrawsContent(
+        makeMessage([toolCallPart({ output: [role, role, role] })])
+      )
+    ).toBe(true);
+  });
+
   it('should not draw content when the sections hint suppresses every card', () => {
     expect(
       messageDrawsContent(

@@ -62,6 +62,20 @@ it('should hide the sections behind a collapsed disclosure', () => {
   ).toBeInTheDocument();
 });
 
+it('should add the period to the count line when the period is emphasised', () => {
+  render(<CompactAnswerCard role={role} period />);
+
+  expect(
+    screen.getByText('10 months · 2 responsibilities · 1 achievement')
+  ).toBeInTheDocument();
+});
+
+it('should leave the period out of the count line by default', () => {
+  render(<CompactAnswerCard role={role} />);
+
+  expect(screen.queryByText(/10 months/)).not.toBeInTheDocument();
+});
+
 it('should not render a disclosure when the role has no rows', () => {
   render(
     <CompactAnswerCard role={{ ...role, content: '# A role with no lists' }} />

@@ -82,6 +82,22 @@ it('should render the responsibilities and achievements sections open', () => {
   expect(screen.queryByRole('group')).not.toBeInTheDocument();
 });
 
+it('should render the period row when the period is emphasised', () => {
+  render(<FullAnswerCard role={role} sections={['tech']} period />);
+
+  expect(screen.getByRole('heading', { name: 'Period' })).toBeInTheDocument();
+  expect(screen.getByText('Jul 2025 – May 2026')).toBeInTheDocument();
+  expect(screen.getByText('10 months')).toBeInTheDocument();
+});
+
+it('should omit the period row by default', () => {
+  render(<FullAnswerCard role={role} sections={['tech']} />);
+
+  expect(
+    screen.queryByRole('heading', { name: 'Period' })
+  ).not.toBeInTheDocument();
+});
+
 it('should omit the tech stack when the tech section is not requested', () => {
   render(<FullAnswerCard role={role} sections={['responsibilities']} />);
 

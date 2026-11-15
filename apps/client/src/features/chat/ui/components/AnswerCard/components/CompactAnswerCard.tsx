@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { parseRoleContent } from '../../../../utils/parseRoleContent';
+import { formatRoleDuration } from '../../../utils/formatRoleDuration';
 
 import { AnswerCardLayout } from './AnswerCardLayout';
 import { AnswerCounts } from './AnswerCounts';
@@ -13,9 +14,10 @@ import type { Role } from '../../../../interfaces/role.interface';
 
 type Props = {
   role: Role;
+  period?: boolean;
 };
 
-export const CompactAnswerCard = ({ role }: Props) => {
+export const CompactAnswerCard = ({ role, period }: Props) => {
   const { responsibilities, achievements } = useMemo(
     () => parseRoleContent(role.content),
     [role.content]
@@ -30,6 +32,7 @@ export const CompactAnswerCard = ({ role }: Props) => {
       <AnswerCounts
         responsibilities={responsibilities.length}
         achievements={achievements.length}
+        period={period ? formatRoleDuration(role.duration_months) : undefined}
       />
       {hasRows ? (
         <AnswerDisclosure>

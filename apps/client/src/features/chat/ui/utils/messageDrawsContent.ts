@@ -11,12 +11,13 @@ const partDrawsContent = (part: MessagePart): boolean => {
 
   const data = getAnswerCardData(part);
 
-  return (
-    data?.roles.some(
-      (role) =>
-        resolveAnswerCard(role, data.sectionsHint, data.roles.length)
-          .variant !== 'none'
-    ) ?? false
+  if (!data) return false;
+  if (data.variant === 'list') return true;
+
+  return data.roles.some(
+    (role) =>
+      resolveAnswerCard(role, data.sectionsHint, data.roles.length).variant !==
+      'none'
   );
 };
 

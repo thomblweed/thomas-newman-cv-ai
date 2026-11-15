@@ -11,7 +11,10 @@ export const rolesToolServer = rolesToolDefinition.server(
       startDate: input.startDate,
       endDate: input.endDate,
       months: input.months,
-      company: input.company
+      company: input.company,
+      tech: input.tech,
+      industry: input.industry,
+      employmentType: input.employmentType
     });
   }
 );

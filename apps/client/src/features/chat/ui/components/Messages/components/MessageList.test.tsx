@@ -6,7 +6,25 @@ import { MessageList } from './MessageList';
 const user = userEvent.setup();
 const mockScrollToBottom = vi.fn();
 
-type MockPart = { type: string; content: string };
+type MockPart = {
+  type: string;
+  content: string;
+  name?: string;
+  state?: string;
+  arguments?: string;
+  output?: unknown;
+};
+
+const makeRole = (company: string) => ({
+  type: 'role',
+  company,
+  title: 'Senior Frontend Engineer',
+  period_start: '2025-07',
+  duration_months: 10,
+  employment_type: 'full-time',
+  tech_stack: ['react'],
+  content: '## Responsibilities\n\n### Delivery\n\nShipped new features'
+});
 type MockMessage = {
   id: string;
   role: 'user' | 'assistant';
@@ -122,6 +140,51 @@ describe('When the chat is loading', () => {
     render(<MessageList />);
 
     expect(screen.queryByText('Waiting for response')).not.toBeInTheDocument();
+  });
+
+  it('should not show the waiting indicator when the last assistant message has a completed get_roles call', () => {
+    mockMessages = [
+      {
+        id: '1',
+        role: 'assistant',
+        parts: [
+          {
+            type: 'tool-call',
+            content: '',
+            name: 'get_roles',
+            state: 'complete',
+            output: [makeRole('Slice')]
+          }
+        ]
+      }
+    ];
+
+    render(<MessageList />);
+
+    expect(screen.queryByText('Waiting for response')).not.toBeInTheDocument();
+  });
+
+  it('should show the waiting indicator when the last assistant message suppresses every card', () => {
+    mockMessages = [
+      {
+        id: '1',
+        role: 'assistant',
+        parts: [
+          {
+            type: 'tool-call',
+            content: '',
+            name: 'get_roles',
+            state: 'complete',
+            arguments: '{"sections":[]}',
+            output: [makeRole('Slice')]
+          }
+        ]
+      }
+    ];
+
+    render(<MessageList />);
+
+    expect(screen.getByText('Waiting for response')).toBeInTheDocument();
   });
 
   it('should not show the waiting indicator when the last assistant message has a thinking part', () => {

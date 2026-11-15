@@ -13,14 +13,19 @@ type Props = {
 };
 
 export const AnswerCard = ({ role, sectionsHint, roleCount }: Props) => {
-  const { variant, sections } = resolveAnswerCard(
+  const { variant, sections, period } = resolveAnswerCard(
     role,
     sectionsHint,
     roleCount
   );
 
-  if (variant === 'none') return null;
-  if (variant === 'compact') return <CompactAnswerCard role={role} />;
+  if (variant === 'compact') {
+    return <CompactAnswerCard role={role} period={period} />;
+  }
 
-  return <FullAnswerCard role={role} sections={sections} />;
+  if (variant === 'full') {
+    return <FullAnswerCard role={role} sections={sections} period={period} />;
+  }
+
+  return null;
 };

@@ -12,17 +12,24 @@ export const answerSections = [
 ] as const;
 
 export type AnswerSection = (typeof answerSections)[number];
-export type SectionsHint = AnswerSection[];
-export type AnswerCardVariant = 'full' | 'compact' | 'none';
+
+export const answerHints = [...answerSections, 'period'] as const;
+
+export type AnswerHint = (typeof answerHints)[number];
+export type SectionsHint = AnswerHint[];
+export type AnswerCardVariant = 'full' | 'compact' | 'list' | 'none';
 
 export interface ResolvedAnswerCard {
   variant: AnswerCardVariant;
   sections: AnswerSection[];
+  period: boolean;
 }
 
 export interface AnswerCardData {
   roles: Role[];
   sectionsHint: SectionsHint | undefined;
+  techFilter: string[];
+  variant: AnswerCardVariant;
 }
 
 export const parseSectionsHint = (
@@ -35,7 +42,7 @@ export const parseSectionsHint = (
       const { sections } = parsed as { sections: unknown };
 
       if (Array.isArray(sections)) {
-        return answerSections.filter((section) => sections.includes(section));
+        return answerHints.filter((hint) => sections.includes(hint));
       }
     }
 
@@ -43,6 +50,38 @@ export const parseSectionsHint = (
   } catch {
     return undefined;
   }
+};
+
+export const parseTechFilter = (argumentsJson: string): string[] => {
+  try {
+    const parsed: unknown = JSON.parse(argumentsJson);
+
+    if (typeof parsed === 'object' && parsed !== null && 'tech' in parsed) {
+      const { tech } = parsed as { tech: unknown };
+
+      if (Array.isArray(tech)) {
+        return tech
+          .filter((slug): slug is string => typeof slug === 'string')
+          .map((slug) => slug.toLowerCase());
+      }
+    }
+
+    return [];
+  } catch {
+    return [];
+  }
+};
+
+export const resolveAnswerCardVariant = (
+  sectionsHint: SectionsHint | undefined,
+  roleCount: number
+): AnswerCardVariant => {
+  if (sectionsHint?.length === 0) return 'none';
+  if (roleCount <= 0) return 'none';
+  if (roleCount === 1) return 'full';
+  if (roleCount === 2) return 'compact';
+
+  return 'list';
 };
 
 const roleHasSection = (
@@ -60,24 +99,29 @@ export const resolveAnswerCard = (
   sectionsHint: SectionsHint | undefined,
   roleCount: number
 ): ResolvedAnswerCard => {
-  if (sectionsHint?.length === 0) return { variant: 'none', sections: [] };
-  if (!sectionsHint && roleCount <= 0) return { variant: 'none', sections: [] };
+  const variant = resolveAnswerCardVariant(sectionsHint, roleCount);
+
+  if (variant === 'none')
+    return { variant: 'none', sections: [], period: false };
 
   const { responsibilities, achievements } = parseRoleContent(role.content);
   const rows = {
     responsibilities: responsibilities.length,
     achievements: achievements.length
   };
-  const sections = (sectionsHint ?? [...answerSections]).filter((section) =>
+  const hintedSections = sectionsHint
+    ? answerSections.filter((section) => sectionsHint.includes(section))
+    : [...answerSections];
+  const sections = hintedSections.filter((section) =>
     roleHasSection(section, role, rows)
   );
+  const period = sectionsHint?.includes('period') ?? false;
 
-  if (sections.length === 0) return { variant: 'none', sections: [] };
+  if (variant !== 'list' && sections.length === 0 && !period) {
+    return { variant: 'none', sections: [], period: false };
+  }
 
-  const variant: AnswerCardVariant =
-    sectionsHint !== undefined || roleCount === 1 ? 'full' : 'compact';
-
-  return { variant, sections };
+  return { variant, sections, period };
 };
 
 export const getAnswerCardData = (part: MessagePart): AnswerCardData | null => {
@@ -90,6 +134,12 @@ export const getAnswerCardData = (part: MessagePart): AnswerCardData | null => {
   }
 
   const roles = Array.isArray(part.output) ? (part.output as Role[]) : [];
+  const sectionsHint = parseSectionsHint(part.arguments);
 
-  return { roles, sectionsHint: parseSectionsHint(part.arguments) };
+  return {
+    roles,
+    sectionsHint,
+    techFilter: parseTechFilter(part.arguments),
+    variant: resolveAnswerCardVariant(sectionsHint, roles.length)
+  };
 };

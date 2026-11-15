@@ -11,6 +11,9 @@ interface GetRolesOptions {
   endDate?: string;
   months?: number;
   company?: string;
+  tech?: string[];
+  industry?: string[];
+  employmentType?: string;
 }
 
 const dataPath = path.join(process.cwd(), 'data/cv/roles');
@@ -42,6 +45,20 @@ const matchesCompany = (role: Role, company: string | undefined): boolean => {
     role.client?.toLowerCase().includes(needle) === true
   );
 };
+
+const matchesAnyTerm = (
+  values: string[] | undefined,
+  terms: string[] | undefined
+): boolean => {
+  if (!terms || terms.length === 0) return true;
+
+  const haystack = (values ?? []).map((value) => value.toLowerCase());
+
+  return terms.some((term) => haystack.includes(term.toLowerCase()));
+};
+
+const matchesIndustry = (role: Role, industry: string[] | undefined) =>
+  matchesAnyTerm(role.industry?.split(','), industry);
 
 export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
   const files = await fs.readdir(dataPath);
@@ -106,7 +123,14 @@ export const getRoles = async (options?: GetRolesOptions): Promise<Role[]> => {
     .filter((role) =>
       isDateInRange(role.period_start, role.period_end, startDate, endDate)
     )
-    .filter((role) => matchesCompany(role, options?.company));
+    .filter((role) => matchesCompany(role, options?.company))
+    .filter((role) => matchesAnyTerm(role.tech_stack, options?.tech))
+    .filter((role) => matchesIndustry(role, options?.industry))
+    .filter(
+      (role) =>
+        !options?.employmentType ||
+        role.employment_type === options.employmentType
+    );
 
   return filteredRoles.sort((a, b) => {
     if (b.period_start < a.period_start) return -1;

@@ -24,6 +24,14 @@ vi.mock('../../AnswerCard', () => ({
   )
 }));
 
+vi.mock('../../AnswerCard/components/ListAnswerCard', () => ({
+  ListAnswerCard: ({ roles }: { roles: { company: string }[] }) => (
+    <div data-testid="list-answer-card">
+      {roles.map((role) => role.company).join(', ')}
+    </div>
+  )
+}));
+
 type TestMessage = Parameters<typeof MessageItem>[0]['message'];
 
 const makeMessage = (
@@ -193,7 +201,22 @@ describe('When an assistant message carries a completed get_roles call', () => {
     expect(screen.getAllByTestId('answer-card')).toHaveLength(2);
   });
 
-  it('should render the cards before the assistant prose', () => {
+  it('should render a single list card when three roles answer', () => {
+    const message = makeMessage('assistant', [
+      toolCallPart({
+        output: [makeRole('Slice'), makeRole('Ensono'), makeRole('Dayrize')]
+      })
+    ]);
+
+    render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);
+
+    expect(screen.queryAllByTestId('answer-card')).toHaveLength(0);
+    expect(screen.getByTestId('list-answer-card')).toHaveTextContent(
+      'Slice, Ensono, Dayrize'
+    );
+  });
+
+  it('should render the prose before the cards', () => {
     const message = makeMessage('assistant', [
       toolCallPart({ output: [makeRole('Slice')] }),
       { type: 'text', content: 'Here are the roles' }
@@ -205,7 +228,25 @@ describe('When an assistant message carries a completed get_roles call', () => {
     const prose = screen.getByTestId('animated-markdown');
 
     expect(
-      card.compareDocumentPosition(prose) & Node.DOCUMENT_POSITION_FOLLOWING
+      prose.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING
+    ).toBeTruthy();
+  });
+
+  it('should render a list card beneath the prose', () => {
+    const message = makeMessage('assistant', [
+      toolCallPart({
+        output: [makeRole('Slice'), makeRole('Ensono'), makeRole('Dayrize')]
+      }),
+      { type: 'text', content: 'Here are the roles' }
+    ]);
+
+    render(<MessageItem message={message} onContentUpdate={onContentUpdate} />);
+
+    const list = screen.getByTestId('list-answer-card');
+    const prose = screen.getByTestId('animated-markdown');
+
+    expect(
+      prose.compareDocumentPosition(list) & Node.DOCUMENT_POSITION_FOLLOWING
     ).toBeTruthy();
   });
 

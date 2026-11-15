@@ -1,4 +1,5 @@
 import { AnswerRow } from './AnswerRow';
+import { AnswerRowList } from './AnswerRowList';
 
 import type { AnswerRowData } from '../../../../utils/parseRoleContent';
 
@@ -15,11 +16,11 @@ export const AnswerSection = ({ title, rows }: Props) => {
       <h4 className="text-xs font-semibold tracking-wide text-primary uppercase">
         {title}
       </h4>
-      <ul className="flex flex-col gap-2">
+      <AnswerRowList>
         {rows.map((row) => (
           <AnswerRow key={row.title} title={row.title} detail={row.detail} />
         ))}
-      </ul>
+      </AnswerRowList>
     </section>
   );
 };

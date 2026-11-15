@@ -1,7 +1,7 @@
 # Project context
 
 - Monorepo managed with `pnpm` + Turborepo (`turbo.json`).
-- Node version is pinned via `package.json` engines.
+- Node version is pinned via `package.json` engines and `.nvmrc`; run `nvm use` to switch to it.
 - Apps live under `apps/`; the only app is `apps/client` (TanStack Start + React 19).
 - Feature code lives under `apps/client/src/features/<feature>/`.
 

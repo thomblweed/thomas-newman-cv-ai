@@ -44,6 +44,9 @@ importers:
       '@tanstack/ai-gemini':
         specifier: 1.2.2
         version: 1.2.2(@modelcontextprotocol/sdk@1.27.1(@cfworker/json-schema@4.1.6)(zod@4.6.7))(@tanstack/ai@1.4.0(@opentelemetry/api@1.10.0)(zod@4.6.7))
+      '@tanstack/ai-openrouter':
+        specifier: 1.1.2
+        version: 1.1.2(@tanstack/ai@1.4.0(@opentelemetry/api@1.10.0)(zod@4.6.7))
       '@tanstack/ai-react':
         specifier: 1.0.2
         version: 1.0.2(@opentelemetry/api@1.10.0)(@tanstack/ai@1.4.0(@opentelemetry/api@1.10.0)(zod@4.6.7))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(zod@4.6.7)
@@ -837,6 +840,9 @@ packages:
     resolution: {integrity: sha512-hAX0pT/73190NLqBPPWSdBVGtbY6VOhWYK3qqHqtXQ1gK7kS2yz4+ivsN07hpJ6I3aeMtKP6J6npsEKOAzuTLA==}
     engines: {node: '>=20.0'}
 
+  '@openrouter/sdk@0.13.20':
+    resolution: {integrity: sha512-fx4o19FHgadEldfrSOgSbXAi32hCE3O708q1nxcoxYrW6fP6/WggX3o5PmnlnObzmxrqLMkZpqg188K+Twguhg==}
+
   '@opentelemetry/api@1.10.0':
     resolution: {integrity: sha512-lMkyes8iHrG+mk6WH7X70MdCLI2RS0FwNBY1PyQ8UemaijE2m5mv5A0Niy3HtbYTFrgkUEQjFMXmSAk2hQDuPQ==}
     engines: {node: '>=8.0.0'}
@@ -1487,6 +1493,11 @@ packages:
     resolution: {integrity: sha512-TvPtHF2aajwgXIxsZKBIeQYT/X5Da3ZvTQgwpIX4blh/BCnC7N/4hs2Q3JG0r4IqIFToJSNfohoSVNBxpFTajg==}
     peerDependencies:
       '@tanstack/ai': ^1.4.0
+
+  '@tanstack/ai-openrouter@1.1.2':
+    resolution: {integrity: sha512-x/6xLvdRDUNUYv9OcUs8pZxozZp+8PAJX14GBZxuolKowP31tDMiw+yoQ9U7MGMfh60l4v7N3J8nk7KSiz10fQ==}
+    peerDependencies:
+      '@tanstack/ai': ^1.2.0
 
   '@tanstack/ai-react@1.0.2':
     resolution: {integrity: sha512-c4khP6tKUVWUI0rehUuBSJTGJ2lH99qvdkxT6aBxmvhZVCps3icJYso0PCXJTCwEadML3k8j3+7o6159cu42/A==}
@@ -4943,6 +4954,10 @@ snapshots:
 
   '@oozcitak/util@10.0.0': {}
 
+  '@openrouter/sdk@0.13.20':
+    dependencies:
+      zod: 4.6.7
+
   '@opentelemetry/api@1.10.0': {}
 
   '@oxc-project/types@0.156.0': {}
@@ -5427,6 +5442,12 @@ snapshots:
       - bufferutil
       - supports-color
       - utf-8-validate
+
+  '@tanstack/ai-openrouter@1.1.2(@tanstack/ai@1.4.0(@opentelemetry/api@1.10.0)(zod@4.6.7))':
+    dependencies:
+      '@openrouter/sdk': 0.13.20
+      '@tanstack/ai': 1.4.0(@opentelemetry/api@1.10.0)(zod@4.6.7)
+      '@tanstack/ai-utils': 1.1.0
 
   '@tanstack/ai-react@1.0.2(@opentelemetry/api@1.10.0)(@tanstack/ai@1.4.0(@opentelemetry/api@1.10.0)(zod@4.6.7))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(zod@4.6.7)':
     dependencies:

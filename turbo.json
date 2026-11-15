@@ -1,7 +1,14 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
-  "globalEnv": ["GEMINI_API_KEY", "ANTHROPIC_API_KEY", "NODE_ENV", "DEV"],
+  "globalEnv": [
+    "GEMINI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "OPENROUTER_API_KEY",
+    "AI_PROVIDER",
+    "NODE_ENV",
+    "DEV"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

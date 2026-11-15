@@ -20,6 +20,7 @@
     "@tanstack/ai-anthropic": "1.1.1",
     "@tanstack/ai-client": "1.1.0",
     "@tanstack/ai-gemini": "1.2.2",
+    "@tanstack/ai-openrouter": "1.1.2",
     "@tanstack/ai-react": "1.0.2",
     "@tanstack/react-devtools": "0.10.14",
     "@tanstack/react-router": "1.170.46",
